@@ -13,8 +13,8 @@
       "size_bytes": 875
     },
     "README.md": {
-      "sha256": "ef7061a11f90ce8607f49a7cc28491727556704205c6e9093ce3bb19a0d840a7",
-      "size_bytes": 4789
+      "sha256": "fcb2feab1fd448097a364c1b9d337fb6d9397dae826580efcd7700f03de86bb9",
+      "size_bytes": 4956
     },
     "WORKFLOW_GUIDE_EN.md": {
       "sha256": "d54197a5871c3febc91f762ccedeae05f9ba1114e44ddb2c87da398ee311e340",
@@ -2589,12 +2589,12 @@
       "size_bytes": 10417
     },
     "report.pdf": {
-      "sha256": "1a71c2c76f85ecef789a1b696629f38c72b8f2058431e05e51f96d0f75a79614",
-      "size_bytes": 28453
+      "sha256": "b8b18edd8485bb25b52fcdb4949578343088f710714831073c155f3745ab1693",
+      "size_bytes": 29016
     },
     "reproduce.py": {
-      "sha256": "f587108cede61563a49bb4f67f8bee91eed815e8516764dac1b7a46e517b6189",
-      "size_bytes": 9411
+      "sha256": "949e6d187d92635ca1f4c4822c4a494658e9f0cd3258e540cc50edd7fd0867cf",
+      "size_bytes": 11515
     },
     "requirements.txt": {
       "sha256": "d1425c04a57dccaa0fe8268a01ac3afd1deb3955c7d61459dbdf918884741965",
@@ -2617,8 +2617,8 @@
       "size_bytes": 298
     },
     "typesetting/main.tex": {
-      "sha256": "8fd31f1635d7775069210e879510895ab5130c8ed48042add935a837e25bab2a",
-      "size_bytes": 13727
+      "sha256": "ed6a7ee231a9038be5eea9ed967865431bf32c892d7c8c5d61cb892777f0f588",
+      "size_bytes": 14011
     },
     "typesetting/neurips_2026.sty": {
       "sha256": "f939b4e9e1596d5506583ce51c54fae7ecbb2efafde241d26b5b3c0383d9653b",

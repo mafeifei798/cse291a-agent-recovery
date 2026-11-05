@@ -30,7 +30,7 @@ For example, changing the Analyst's reported size from 4,096 to 4,160 made the P
 \paragraph{Experimental setup}
 Four fixed tasks, each repeated three times, cover clean execution and four faults: incorrect intermediate values (\textbf{ERR}), malicious instructions (\textbf{ADV}), a local tool timeout with no output (\textbf{TMO}), and stale information after a source update (\textbf{STL}). If a run fails before injection, we keep it and record that the injected fault was not reached.
 
-\textbf{BASE} checks output structure and source-version consistency at submission. \textbf{VERIFY\_STOP} also compares Analyst and Planner outputs with current sources and recomputes the arithmetic; it stops at the first error. \textbf{FULL\_RESTART} receives the faulty result's identity, conditionally undoes owned writes, and reruns BASE once from current sources. Verification and scoring use separate implementations of the same business rules.
+\textbf{BASE} checks output structure and source-version consistency at submission. \textbf{VERIFY\_STOP} also compares Analyst and Planner outputs with current sources and recomputes the arithmetic; it stops at the first error without extra LLM calls. \textbf{FULL\_RESTART} receives the faulty result's identity, conditionally undoes owned writes, and reruns BASE once from current sources. Verification and scoring use separate implementations of the same business rules.
 
 \begin{center}
 \small
@@ -51,7 +51,7 @@ STL & 0 / 0 / 12 & 0 / 0 / 12 & 6 / 6 / 0 \\
 {\footnotesize Table 1. C: correct completion; W: incorrect configuration written; S: stopped. The 168 scheduled rows include 12 unnecessary ADV restarts; 156 workflows executed. Stops and wrong writes are separate outcomes.\par}
 
 \paragraph{Propagation and verification}
-The 12 BASE ERR injections produced \textbf{18 incorrect downstream results and 12 wrong writes}. VERIFY blocked all 11 ERR injections that reached their targets; one run stopped earlier on a natural error. STL produced 12 incorrect descendants, but version checks blocked their writes. Timeouts stopped the workflow before a downstream result existed. All 12 BASE ADV messages were delivered without achieving their attack goals.
+The 12 BASE ERR injections produced \textbf{18 incorrect downstream results and 12 wrong writes}. VERIFY blocked all 11 ERR injections that reached their targets; one run stopped earlier on a natural error. Its three clean-run stops also caught natural model errors, with no false rejection observed. STL produced 12 incorrect descendants, but version checks blocked their writes. Timeouts stopped the workflow before a downstream result existed. All 12 BASE ADV messages were delivered without achieving their attack goals.
 
 \section{Restart costs and the next phase}
 \paragraph{A restart can produce a new wrong answer}
@@ -74,9 +74,9 @@ Total & 156 & 602 \\
 \bottomrule
 \end{tabular}
 \end{center}
-{\footnotesize Table 2. The main experiment cost about 3.24 US cents at the recorded token prices. VERIFY used fewer calls because it often stopped early, not because it completed the same tasks more cheaply.\par}
+{\footnotesize Table 2. The main experiment cost about 3.24 US cents at the recorded token prices. VERIFY used fewer calls because it often stopped early. Across its 60 runs, verification averaged 3.3 extra source reads and 2.7 ms of measured checking time.\par}
 
-A separate permission/resource study recorded 13 policy-violating writes in 48 runs without a final authorization check, and none in 48 runs with it. Ordinary model errors also stopped permitted tasks. With revised prompts, 21/24 normal tasks with valid permission and resources completed. In 24 denial, revocation, or resource-limit trials, 23 stopped safely and one had an infrastructure failure. Reuse and re-execution both need current permission checks; detailed results are in the separate safety supplement.
+A separate permission/resource study produced \textbf{24 unsafe write proposals in each group} (48 runs per group). Without a final authorization check, 13 were committed; with it, all 24 were rejected. Runs that stopped earlier on model errors do not demonstrate protection. With revised prompts, 21/24 normal tasks completed; 23/24 denial, revocation, or resource-limit trials stopped safely and one had an infrastructure failure. Reuse and re-execution both need current permission checks. Details are in the safety supplement.
 
 \paragraph{Selective recovery: design and an initial result}
 Our extension uses the Bank Marketing dataset (41,188 records). An \textbf{Analyst} reads data facts, a \textbf{Planner} chooses a feature bundle and a logistic-regression or random-forest recipe, and a \textbf{Reviewer} accepts training results or requests one adjustment. Deterministic tools train and predict with sklearn on CPU and save a report. The runtime records the messages and file versions each result used.
@@ -87,19 +87,19 @@ We compare full restart, conservative dependency-based recovery, and \textbf{ear
 \small
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.12}
-\begin{tabular}{@{}lrrrrr@{}}
+\begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{New fits} & \textbf{Reused} & \textbf{Train CPU s} & \textbf{Check CPU s} & \textbf{Total CPU s} \\
+\textbf{Method} & \textbf{New fits} & \textbf{Reused} & \textbf{\shortstack{Train\\CPU s}} & \textbf{\shortstack{Check\\CPU s}} & \textbf{\shortstack{Total\\CPU s}} & \textbf{\shortstack{Recovery\\wall s}} & \textbf{\shortstack{API cost\\US cents}} \\
 \midrule
-FULL & 3 & 0 & 15.29 & 13.28 & 28.57 \\
-CONSERVATIVE & 3 & 0 & 15.92 & 13.27 & 29.19 \\
-CUTOFF & 0 & 3 & 0.00 & 13.28 & 13.28 \\
+FULL & 3 & 0 & 15.29 & 13.28 & 28.57 & 48.5 & 0.1082 \\
+CONSERVATIVE & 3 & 0 & 15.92 & 13.27 & 29.19 & 47.7 & 0.1078 \\
+CUTOFF & 0 & 3 & 0.00 & 13.28 & 13.28 & 29.0 & 0.1166 \\
 \bottomrule
 \end{tabular}
 \end{center}
-{\footnotesize Table 3. One checkpoint, one run per method (n=1); final model and metrics matched, with eight model calls each. All methods spent about 13.3 CPU s checking artifacts. CUTOFF avoided FULL's 15.3 CPU s of training-worker work; worker times include startup and processing.\par}
+{\footnotesize Table 3. One checkpoint, one run per method (n=1); final model and metrics matched, with eight model calls each. All methods paid about 13.3 CPU s for artifact checks. CUTOFF avoided FULL's 15.3 CPU s of training and reduced recovery wall time, but its usage-based API cost was 7.7\% higher. Worker times include startup and processing.\par}
 
-The planned matrix has \textbf{three scenarios times six repetitions}: a decision-changing error, a row-count error that leaves feature and recipe eligibility unchanged, and a source update. All methods start from the same saved state after the first training result, before Reviewer feedback. The pilot above instead followed one approved adjustment. Failed slots remain in the results; the incomplete source-update CUTOFF case will be covered within this matrix. We will report correctness, invalid reuse, duplicate effects, recomputation, latency, and fees. Paired clean runs and one heavier CPU workload will measure tracking overhead and break-even fault rates. Four baseline tasks and this single pilot do not establish general reliability.
+The next evaluation covers \textbf{three scenarios with six repetitions each}: changed decisions, row-count errors, and updated data. Methods share a saved state before Reviewer feedback; this pilot followed an approved adjustment. Failed slots remain counted. Source-update recovery is unfinished and included in this plan. We will measure correctness, invalid reuse, duplicate effects, recomputation, latency, and cost. Paired clean runs and a heavier CPU workload will test tracking overhead and break-even fault rates. Four baseline tasks and one pilot do not establish general reliability.
 
 {\footnotesize [1] Li et al., \href{https://arxiv.org/abs/2511.00628}{AgentGit, arXiv:2511.00628}. [2] Yang et al., \href{https://arxiv.org/abs/2605.23311}{DART, arXiv:2605.23311}. [3] Bazel, \href{https://bazel.build/reference/skyframe}{bazel.build/reference/skyframe}.\par}
 
@@ -143,7 +143,7 @@ Metrics include correct completion, invalid reuse, duplicate actions, recomputat
 \paragraph{Runtime tests and interruptions (planned)}
 Fake-tool tests will interrupt a completed action before its receipt is saved, repeat a Reviewer approval, and introduce a concurrent data update. Recovery must look up actions by ID, avoid duplicate effects, and preserve others' updates.
 
-429/502 or missing usage stops the batch. Interrupted runs remain infrastructure failures; once service and accounting checks pass, only unstarted runs continue in a new batch. Unknown effects stay unresolved. We will report negative savings and completion rates alongside costs.
+429/502 or missing token-usage data stops the batch. Interrupted runs remain infrastructure failures; once service and accounting checks pass, only unstarted runs continue in a new batch. Unknown effects stay unresolved. We will report negative savings and completion rates alongside costs.
 
 \small
 \paragraph{Configuration tasks}

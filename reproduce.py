@@ -108,10 +108,24 @@ def baseline(out):
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(timings)
     write_csv(out/'discarded_calls.csv',discarded)
     save(out/'new_error_cases.json',focus);save(out/'p4_recomputed.json',r)
+    verified=[t for t in trials if t['policy']=='VERIFY_STOP' and t['executed']]
+    clean_stops=[t for t in verified if t['condition']=='CLEAN' and t['verifier_rejected']]
+    assert len(verified)==60 and len(clean_stops)==3
+    assert all(t['clean_false_reject'] is False and t['wrong_result_ids'] for t in clean_stops)
+    verification={'runs':len(verified),
+        'extra_source_reads_mean':statistics.mean(t['extra_verifier_logical_reads'] for t in verified),
+        'checking_time_ms_mean':statistics.mean(t['timing']['verifier_elapsed_ms'] for t in verified),
+        'clean_run_rejections':len(clean_stops),'observed_clean_false_rejections':0,
+        'clean_rejected_trials':[t['trial_key'] for t in clean_stops],
+        'timing_scope':'Sum of recorded check_candidate timers; not an end-to-end overhead comparison.'}
+    assert verification['extra_source_reads_mean']==3.3
+    assert round(verification['checking_time_ms_mean'],1)==2.7
+    save(out/'verification_summary.json',verification)
     return {'passed':True,'checks':len(audit['checks']),'registered':len(trials),
             'executed':sum(t['executed'] for t in trials),'model_calls':602,'restart_correct':26,
             'restart_wrong_writes':10,'clean_BASE_wrong_writes':2,'ERR_wrong_descendants':18,
-            'discarded_valid_candidates':63,'discarded_total':135,'new_error_cases':15}
+            'discarded_valid_candidates':63,'discarded_total':135,'new_error_cases':15,
+            'verification':verification}
 
 
 def main():
@@ -141,6 +155,20 @@ def main():
         try:runpy.run_path(str(safety_root/'analysis/recompute.py'),run_name='__main__')
         finally:sys.argv=original_argv
         safety_status={'status':'checked','passed':read(out/'safety/RECOMPUTATION_RECEIPT.json')['passed']}
+        safety_checks=read(out/'safety/V1_RECOMPUTED_CHECK.json')
+        safety_rows=[r for batch in safety_checks['checks'] for r in batch['checks']]
+        proposals=[]
+        for enabled in (False,True):
+            chosen=[r for r in safety_rows if r['guard_enabled']==enabled]
+            dangerous=[r for r in chosen if r['dangerous_proposals']]
+            proposals.append({'final_authorization_check':enabled,'runs':len(chosen),
+                'unsafe_write_proposals':sum(r['dangerous_proposals'] for r in chosen),
+                'unsafe_writes_committed':sum(r['unauthorized_commits'] for r in chosen),
+                'unsafe_proposals_rejected_by_guard':sum(r['outcome'] in ('D','B') for r in dangerous) if enabled else 0})
+        assert [(x['runs'],x['unsafe_write_proposals'],x['unsafe_writes_committed']) for x in proposals]==[(48,24,13),(48,24,0)]
+        assert proposals[1]['unsafe_proposals_rejected_by_guard']==24
+        write_csv(out/'safety_proposals.csv',proposals)
+        safety_status['unsafe_proposal_comparison']=proposals
     from pilot_check import check
     pilot=check(ROOT);write_csv(out/'table3_pilot.csv',pilot['table3']);save(out/'pilot_numeric_checks.json',pilot)
     assert all(sha(ROOT/n)==v['sha256'] for n,v in manifest.items())

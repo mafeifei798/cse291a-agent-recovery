@@ -59,6 +59,7 @@ The output directory contains:
 - `table2_calls.csv`: model calls and usage-based cost estimates.
 - `table3_pilot.csv`: training, checking, and reuse in the Bank pilot.
 - `tableA1_timing.csv`: baseline and recovery timing.
+- `verification_summary.json`: extra reads, checking time, and clean-run stops.
 - `REPRODUCTION_RECEIPT.json`: the check results.
 
 The main experiment contains 168 scheduled trials, 156 executed workflows,
@@ -80,6 +81,7 @@ python3 -B reproduce.py --output runs/report_with_safety
 ```
 
 The second command checks the supplement as well as the four report tables.
+It also writes `safety_proposals.csv`, separating unsafe proposals from actual writes.
 Without extraction, it checks the main experiment and Bank pilot only.
 The extracted supplement is ignored by Git.
 
