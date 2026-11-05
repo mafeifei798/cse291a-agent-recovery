@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/ulab-uiuc/MARBLE",
+  "commit": "8d60fa17b5596b44458a52d4296061b9fc13d6f2",
+  "database_main.jsonl_sha256": "e1128d946d49c4943849a758b0c2d22a1af57b7a71c43694107813d8a1542631",
+  "license_sha256": "389d00652aaea7a870e1128c95df7171580f347856b3993f8a0890f1a1cf09ae",
+  "adaptation": "Task 2 Manufacturing init_sql can seed an isolated database. The lock fixture, six-role workflow, message protocol, capability registry, injected faults, evaluator and recovery baseline are project additions. Original anomalies, 100-thread workloads and original Top-2 scoring are not reproduced."
+}

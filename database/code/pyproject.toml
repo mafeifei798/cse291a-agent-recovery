@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "database-agent-lab"
+version = "0.3.1"
+description = "Controlled multi-agent database fault propagation and restart experiments"
+requires-python = ">=3.11"
+dependencies = ["psycopg[binary]==3.2.3"]
+
+[tool.setuptools]
+packages = ["dbagentlab"]
+
+# The upload ZIP/source checkout is the supported runtime artifact; the vendor
+# schema is resolved from the repository root. A wheel alone omits vendor data.

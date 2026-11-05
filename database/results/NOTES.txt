@@ -1,0 +1,5 @@
+All started run receipts retained, including pre-branch failures. This is not a preregistered campaign denominator: scheduled-but-never-started slots need a separate manifest.
+Accidental (pid_swap, timeout) and adversarial (instruction) conditions remain separate.
+Total-run cost/time columns repeat across initial/restart rows: do not sum them by branch.
+Exposure is not causal influence. Automated structured errors do not cover all prose errors.
+No fake zero costs for unknown API usage; no USD pricing is assumed.
