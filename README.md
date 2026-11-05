@@ -49,7 +49,3 @@ This executes all 168 trials with scripted model responses and real SQLite opera
 ## Live execution
 
 The commands above are the offline evaluation path. New configuration API runs need a TritonAI key and a permit; database runs additionally need PostgreSQL 16 and the dependencies in `database/code/requirements.txt`. See the respective source instructions before running them. No credential is included. New stochastic runs are not expected to match the saved responses exactly.
-
-## Report versions
-
-Table 2 reports the original v0.3.0 database results. The v0.3.1 clean-handoff follow-up is reported separately.
