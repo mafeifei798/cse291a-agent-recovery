@@ -1,0 +1,23 @@
+{
+  "L_cap_nano": 2000000000,
+  "acceptance_sha256": "7c88798520dd42f173aac44d4591f2a3c00b009f8bc70f75cd4a3ff49d517c0d",
+  "batch_cap_nano": 500000000,
+  "catalog_sha256": "29f5f5a6cb10cb51896cfc84a0af1ea5da468adc94cba5720d96489022a16e72",
+  "generation_cap": 30,
+  "history_sha256": "d664ae973b0e32a700823a9adaa07ac3f2e06cb69a3fcd8a4c2840d772d877a7",
+  "model": "api-glm-5.3-flash",
+  "models_sha256": "70261f50ed415dbe5269440355442ec6329102b378480eb5a280ee5aa0143106",
+  "order": [
+    "FULL",
+    "CONSERVATIVE",
+    "CUTOFF"
+  ],
+  "output_root": "/home/hoding/cse291a-compare-real-20261031-r1/real",
+  "project_cap_nano": 20000000000,
+  "registration_sha256": "9d7659dd27a5b99b03dab8242471dfbc1205fd735219a7878cf07bc0886fdc1e",
+  "revision": "l-compare-entry-v1",
+  "simulated": false,
+  "source_sha256": "4f693af61c1eebf23d7d4746983bf4fdd4e3f78ea1d1a2385734500c628d9047",
+  "target_root": "/home/hoding/cse291a-compare-real-20261031-r1/project",
+  "unit_call_cap": 10
+}

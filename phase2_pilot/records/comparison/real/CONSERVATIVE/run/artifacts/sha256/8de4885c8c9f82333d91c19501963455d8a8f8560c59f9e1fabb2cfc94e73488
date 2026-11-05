@@ -1,0 +1,1 @@
+{"action":"accept","evidence_id":"LCMP01.CONSERVATIVE.node.0035","reason":"Current selection D1/LR achieves AP 0.17149, which is at or above the required_AP of 0.12685 and exceeds the constant_AP baseline. No further adjustment is needed."}

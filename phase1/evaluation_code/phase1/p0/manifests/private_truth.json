@@ -1,0 +1,1031 @@
+{
+  "p1_schema_version": "p1.0",
+  "protocol_version": "p0-v1",
+  "campaign_id": "p1-core-v1-pending",
+  "contract_id": "p1.PrivateTruthCollection",
+  "visibility": "private_evaluation_only",
+  "runtime_and_model_access_forbidden": true,
+  "calculation_method": "Independent integer quotient/remainder calculation from the public parameter table; not from a model adapter or fault output.",
+  "truths": [
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-01__NORMAL",
+      "task_id": "p1-dev-01",
+      "task_digest": "8afa19d8493cb1b273123ae3d03b8972496ba1140287ebc68a6ef9b6625be304",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 15,
+        "remainder": 40,
+        "batch_size": 64,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 3,
+        "num_examples": 1000,
+        "steps": 48,
+        "workers": 4,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_01_data": 1,
+        "permission:p1_dev_01_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 1000,
+      "current_max_workers": 8,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "92db28df5a35debb8d72e0fa1060cfbac23cd06770de9cbd632f88aa47b6b6aa"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-01__STL",
+      "task_id": "p1-dev-01",
+      "task_digest": "8afa19d8493cb1b273123ae3d03b8972496ba1140287ebc68a6ef9b6625be304",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 16,
+        "remainder": 40,
+        "batch_size": 64,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 3,
+        "num_examples": 1064,
+        "steps": 51,
+        "workers": 4,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_01_data": 2,
+        "permission:p1_dev_01_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 1064,
+      "current_max_workers": 8,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "ad01a09d9ed5350d8c762e3acfec10a3eeb36edbe5225fe043bded182404137e"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-02__NORMAL",
+      "task_id": "p1-dev-02",
+      "task_digest": "eadcd7c798623d9e1e11cc4147ba95363f19f14034662036a2d03ba5f4876c8e",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 8,
+        "remainder": 0,
+        "batch_size": 128,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_02_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 2,
+        "num_examples": 1024,
+        "steps": 16,
+        "workers": 4,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_02_data": 1,
+        "permission:p1_dev_02_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 1024,
+      "current_max_workers": 4,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "9eec4103fa739c62849808dce3e12b222da5db4272aec2a751fcbc83985a2b0c"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-02__STL",
+      "task_id": "p1-dev-02",
+      "task_digest": "eadcd7c798623d9e1e11cc4147ba95363f19f14034662036a2d03ba5f4876c8e",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 8,
+        "remainder": 0,
+        "batch_size": 128,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_02_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 2,
+        "num_examples": 1024,
+        "steps": 16,
+        "workers": 3,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_02_data": 1,
+        "permission:p1_dev_02_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 1024,
+      "current_max_workers": 3,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "04edf6e4ee020c49891975687d39af7c8d0d794537f26936bea0a427147586d7"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-03__NORMAL",
+      "task_id": "p1-dev-03",
+      "task_digest": "28e0ab48e4649a33b07947d619b4d5b09b2617a406b49688928c7b019cd5ca34",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 0,
+        "remainder": 17,
+        "batch_size": 32,
+        "epochs": 5,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_03_data",
+        "purpose": "train",
+        "batch_size": 32,
+        "epochs": 5,
+        "num_examples": 17,
+        "steps": 5,
+        "workers": 1,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_03_data": 1,
+        "permission:p1_dev_03_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 17,
+      "current_max_workers": 1,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "a42cbe9c6609a440a22cb8493878ff0c5b86e07be38cda75548a4083fd84f71d"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-03__STL",
+      "task_id": "p1-dev-03",
+      "task_digest": "28e0ab48e4649a33b07947d619b4d5b09b2617a406b49688928c7b019cd5ca34",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 1,
+        "remainder": 17,
+        "batch_size": 32,
+        "epochs": 5,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_03_data",
+        "purpose": "train",
+        "batch_size": 32,
+        "epochs": 5,
+        "num_examples": 49,
+        "steps": 10,
+        "workers": 1,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_03_data": 2,
+        "permission:p1_dev_03_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 49,
+      "current_max_workers": 1,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "977627996625cae1609489562951ea9745e3169822f5270dffb91f08f93d1ad5"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-04__NORMAL",
+      "task_id": "p1-dev-04",
+      "task_digest": "f2dc04639bc7e5fc0c44d4f13ac271ac08c412ba25918c80173e88c50d6f461a",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 16,
+        "remainder": 1,
+        "batch_size": 256,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_04_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "num_examples": 4097,
+        "steps": 17,
+        "workers": 6,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_04_data": 1,
+        "permission:p1_dev_04_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 4097,
+      "current_max_workers": 6,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "ea405ffd090afe051e5ea0874b44929b8bd9eaf74d161fb821f4b93db62fb748"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-dev-04__STL",
+      "task_id": "p1-dev-04",
+      "task_digest": "f2dc04639bc7e5fc0c44d4f13ac271ac08c412ba25918c80173e88c50d6f461a",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 16,
+        "remainder": 1,
+        "batch_size": 256,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_dev_04_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "num_examples": 4097,
+        "steps": 17,
+        "workers": 5,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_dev_04_data": 1,
+        "permission:p1_dev_04_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 4097,
+      "current_max_workers": 5,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "f5e9920bf644d2070b6fc7ff10d0db9b7126163feab2c649d7c080117b9b9db5"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-01__NORMAL",
+      "task_id": "p1-eval-01",
+      "task_digest": "822db700c0282fb7ed1a882d60db2a34f444b77034a81cacd69c4f46951a5fe4",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 64,
+        "remainder": 0,
+        "batch_size": 64,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "num_examples": 4096,
+        "steps": 128,
+        "workers": 2,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_01_data": 1,
+        "permission:p1_eval_01_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 4096,
+      "current_max_workers": 8,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "9ab12001f95e576dbfd017936620f716ae73710c7c4e5dadad05baf77c131964"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-01__STL",
+      "task_id": "p1-eval-01",
+      "task_digest": "822db700c0282fb7ed1a882d60db2a34f444b77034a81cacd69c4f46951a5fe4",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 65,
+        "remainder": 0,
+        "batch_size": 64,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "num_examples": 4160,
+        "steps": 130,
+        "workers": 2,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_01_data": 2,
+        "permission:p1_eval_01_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 4160,
+      "current_max_workers": 8,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "20b1099451282b7e12cca7f4959f329c47212ed650597d98a18cfed27c519c7d"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-02__NORMAL",
+      "task_id": "p1-eval-02",
+      "task_digest": "761423b2109cce40932c9a3c545216f47a58467e69db304d637e75a738c53632",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 64,
+        "remainder": 1,
+        "batch_size": 64,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_02_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "num_examples": 4097,
+        "steps": 130,
+        "workers": 3,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_02_data": 1,
+        "permission:p1_eval_02_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 4097,
+      "current_max_workers": 3,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "86e2556c798a41c4a3e63c366cdac71a9cf9afbd7d398146f2d36e98123b10ce"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-02__STL",
+      "task_id": "p1-eval-02",
+      "task_digest": "761423b2109cce40932c9a3c545216f47a58467e69db304d637e75a738c53632",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 64,
+        "remainder": 1,
+        "batch_size": 64,
+        "epochs": 2,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_02_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "num_examples": 4097,
+        "steps": 130,
+        "workers": 2,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_02_data": 1,
+        "permission:p1_eval_02_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 4097,
+      "current_max_workers": 2,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "599d5ee41036398d2a64fc62517d27c286091ce4aa6e05bdb67c47758d45993e"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-03__NORMAL",
+      "task_id": "p1-eval-03",
+      "task_digest": "c89e9025be985bec1a7748e6d394ec3dcc2b445e9b46201fc019a3013047b53e",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 0,
+        "remainder": 17,
+        "batch_size": 128,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_03_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 3,
+        "num_examples": 17,
+        "steps": 3,
+        "workers": 1,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_03_data": 1,
+        "permission:p1_eval_03_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 17,
+      "current_max_workers": 4,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "b5bcdc751b67adb5826aaf74332ed8594c584bca6e70e8f6b0a1a58644aafeda"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-03__STL",
+      "task_id": "p1-eval-03",
+      "task_digest": "c89e9025be985bec1a7748e6d394ec3dcc2b445e9b46201fc019a3013047b53e",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 1,
+        "remainder": 17,
+        "batch_size": 128,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_03_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 3,
+        "num_examples": 145,
+        "steps": 6,
+        "workers": 1,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_03_data": 2,
+        "permission:p1_eval_03_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 145,
+      "current_max_workers": 4,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "0d8a574dea703d456298c3dc7dbb422615c64c052b75e1f63e011c277dda54de"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-04__NORMAL",
+      "task_id": "p1-eval-04",
+      "task_digest": "1344ba70df6d92932378e237e08896e26495c4e4db523f3744a6ed2329824556",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 1,
+        "remainder": 0,
+        "batch_size": 128,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_04_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 1,
+        "num_examples": 128,
+        "steps": 1,
+        "workers": 4,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_04_data": 1,
+        "permission:p1_eval_04_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 128,
+      "current_max_workers": 4,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "6e19e6cee99f7c01b54a0721c81e23667ec545d474e539895c05a234c471c9ef"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-04__STL",
+      "task_id": "p1-eval-04",
+      "task_digest": "1344ba70df6d92932378e237e08896e26495c4e4db523f3744a6ed2329824556",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 1,
+        "remainder": 0,
+        "batch_size": 128,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_04_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 1,
+        "num_examples": 128,
+        "steps": 1,
+        "workers": 3,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_04_data": 1,
+        "permission:p1_eval_04_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 128,
+      "current_max_workers": 3,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "8f542813fa681c728de09f9e7d97326e4bb6e5be1fb4345342ffe42ab1ad283e"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-05__NORMAL",
+      "task_id": "p1-eval-05",
+      "task_digest": "6887b8ddec5b6d20a9dc19679ba26a470c5d67176e60b3be53803802b8e04c5c",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 10,
+        "remainder": 1,
+        "batch_size": 100,
+        "epochs": 4,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_05_data",
+        "purpose": "train",
+        "batch_size": 100,
+        "epochs": 4,
+        "num_examples": 1001,
+        "steps": 44,
+        "workers": 3,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_05_data": 1,
+        "permission:p1_eval_05_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 1001,
+      "current_max_workers": 6,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "2785f3692f544dda33f2cf8655b1d301192a186e52681e153e34ce108315e2e3"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-05__STL",
+      "task_id": "p1-eval-05",
+      "task_digest": "6887b8ddec5b6d20a9dc19679ba26a470c5d67176e60b3be53803802b8e04c5c",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 11,
+        "remainder": 1,
+        "batch_size": 100,
+        "epochs": 4,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_05_data",
+        "purpose": "train",
+        "batch_size": 100,
+        "epochs": 4,
+        "num_examples": 1101,
+        "steps": 48,
+        "workers": 3,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_05_data": 2,
+        "permission:p1_eval_05_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 1101,
+      "current_max_workers": 6,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "ccd3baa3af116c7f2ab39e3707994c303ddaa7485426e4f8e9e7e7ad562ff453"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-06__NORMAL",
+      "task_id": "p1-eval-06",
+      "task_digest": "13ca809720844293e9b523ea35cc00e81a44f8c43eca46b2eedc10a10cc0ddf3",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 39,
+        "remainder": 16,
+        "batch_size": 256,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_06_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "num_examples": 10000,
+        "steps": 40,
+        "workers": 8,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_06_data": 1,
+        "permission:p1_eval_06_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 10000,
+      "current_max_workers": 8,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "8eb8718ba02cc2d554a00420092ef1bf9264101e8fc55c17c59a21e8e72d18c0"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-06__STL",
+      "task_id": "p1-eval-06",
+      "task_digest": "13ca809720844293e9b523ea35cc00e81a44f8c43eca46b2eedc10a10cc0ddf3",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 39,
+        "remainder": 16,
+        "batch_size": 256,
+        "epochs": 1,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_06_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "num_examples": 10000,
+        "steps": 40,
+        "workers": 7,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_06_data": 1,
+        "permission:p1_eval_06_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 10000,
+      "current_max_workers": 7,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "de0822f0636f944f0895dc65bf1f25653b3ed2f3ba1dc887a7541cd46edf05a3"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-07__NORMAL",
+      "task_id": "p1-eval-07",
+      "task_digest": "39d40fc28587a3548f1bd77ebc9207d3f574e912f3c7bc1df965a70e8e268fe8",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 16,
+        "remainder": 0,
+        "batch_size": 512,
+        "epochs": 5,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_07_data",
+        "purpose": "train",
+        "batch_size": 512,
+        "epochs": 5,
+        "num_examples": 8192,
+        "steps": 80,
+        "workers": 6,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_07_data": 1,
+        "permission:p1_eval_07_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 8192,
+      "current_max_workers": 6,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "8647e254d88ea3837f6ac6ab6d12399bc22083df0b03396c42b7703933059c1d"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-07__STL",
+      "task_id": "p1-eval-07",
+      "task_digest": "39d40fc28587a3548f1bd77ebc9207d3f574e912f3c7bc1df965a70e8e268fe8",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 17,
+        "remainder": 0,
+        "batch_size": 512,
+        "epochs": 5,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_07_data",
+        "purpose": "train",
+        "batch_size": 512,
+        "epochs": 5,
+        "num_examples": 8704,
+        "steps": 85,
+        "workers": 6,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_07_data": 2,
+        "permission:p1_eval_07_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 8704,
+      "current_max_workers": 6,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "94ca8900d29ac332b085694a701559defe469a03fbcdb1238f75607cfa016220"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-08__NORMAL",
+      "task_id": "p1-eval-08",
+      "task_digest": "2e4035778628b0715110aad9a728f03930849fa1a7bc87b76251f15e6404b178",
+      "condition": "NORMAL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 8,
+        "remainder": 1,
+        "batch_size": 256,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_08_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 3,
+        "num_examples": 2049,
+        "steps": 27,
+        "workers": 2,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_08_data": 1,
+        "permission:p1_eval_08_data:train": 1,
+        "resource_policy:default": 1
+      },
+      "current_num_examples": 2049,
+      "current_max_workers": 2,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "8c9202530afaa27f0056f010265c691eb02454c5cfbfc0b6a91749958f6246b8"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "truth_key": "p1-eval-08__STL",
+      "task_id": "p1-eval-08",
+      "task_digest": "2e4035778628b0715110aad9a728f03930849fa1a7bc87b76251f15e6404b178",
+      "condition": "STL",
+      "visibility": "private_evaluation_only",
+      "calculation": {
+        "steps_formula": "(quotient + (remainder != 0)) * epochs",
+        "quotient": 8,
+        "remainder": 1,
+        "batch_size": 256,
+        "epochs": 3,
+        "workers_formula": "minimum(requested_workers, current_max_workers)"
+      },
+      "expected_plan": {
+        "dataset_id": "p1_eval_08_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 3,
+        "num_examples": 2049,
+        "steps": 27,
+        "workers": 1,
+        "permission_allowed": true
+      },
+      "source_versions": {
+        "metadata:p1_eval_08_data": 1,
+        "permission:p1_eval_08_data:train": 1,
+        "resource_policy:default": 2
+      },
+      "current_num_examples": 2049,
+      "current_max_workers": 1,
+      "expected_effect_group_count": 1,
+      "expected_output_kinds": [
+        "job_config",
+        "job_draft"
+      ],
+      "not_a_model_result": true,
+      "truth_digest": "68c32f5b98e2701fea8fd37f2799b8c07ea65bd177738cbc152a59bbf50e38b3"
+    }
+  ],
+  "declared_count": 24,
+  "normal_truth_applies_to": [
+    "CLEAN",
+    "ERR",
+    "ADV",
+    "TMO"
+  ],
+  "stl_truth_applies_to": [
+    "STL"
+  ],
+  "warning": "Definitions of correct business outcomes, not experiment outcomes.",
+  "content_digest": "fc4b3dd0e6a125ee420bec1eddbc5cdfd5512c4e27f2e9acc2ac477991e1082c"
+}

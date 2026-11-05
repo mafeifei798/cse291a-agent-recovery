@@ -1,0 +1,74 @@
+{
+  "GETs": 5,
+  "automatic_continuation": false,
+  "entry": {
+    "accounting_status": "aggregate_reconciled",
+    "automatic_continuation": false,
+    "batch_ready": true,
+    "case": "equivalent",
+    "cloud_starts": 0,
+    "error": null,
+    "historical_real_calls": 364,
+    "new_fake_GETs": 0,
+    "new_fake_generations": 0,
+    "old_results_unchanged": true,
+    "order": [
+      "FULL",
+      "CONSERVATIVE",
+      "CUTOFF"
+    ],
+    "real_API_calls": 24,
+    "real_fits": 6,
+    "real_key_reads": null,
+    "revision": "l-compare-entry-v1",
+    "rows": [
+      {
+        "admissions": 0,
+        "calls": 8,
+        "comparison_performed": true,
+        "equivalent_contracts": true,
+        "error": null,
+        "method": "FULL",
+        "real_fits": 3,
+        "route": "replay_old_approval",
+        "simulated_fits": 0,
+        "state": "completed_execution",
+        "unit": "LCMP01.FULL"
+      },
+      {
+        "admissions": 0,
+        "calls": 8,
+        "comparison_performed": true,
+        "equivalent_contracts": true,
+        "error": null,
+        "method": "CONSERVATIVE",
+        "real_fits": 3,
+        "route": "replay_old_approval",
+        "simulated_fits": 0,
+        "state": "completed_execution",
+        "unit": "LCMP01.CONSERVATIVE"
+      },
+      {
+        "admissions": 3,
+        "calls": 8,
+        "comparison_performed": true,
+        "equivalent_contracts": true,
+        "error": null,
+        "method": "CUTOFF",
+        "real_fits": 0,
+        "route": "replay_old_approval",
+        "simulated_fits": 0,
+        "state": "completed_execution",
+        "unit": "LCMP01.CUTOFF"
+      }
+    ],
+    "scope": "Actual comparison",
+    "sealed_first_cap": 64,
+    "sealed_first_used": 62
+  },
+  "error": null,
+  "generations": 24,
+  "old_holds_released": false,
+  "original_Bank_calls": 364,
+  "training": 6
+}

@@ -1,0 +1,1 @@
+{"action":"accept","evidence_id":"LCMP01.FULL.node.0035","reason":"Current selection D1/LR achieves AP 0.17149, which is at or above required_AP 0.12685 and exceeds the quality goal ratio of 1.25x constant_AP (0.10148). No adjustment needed."}

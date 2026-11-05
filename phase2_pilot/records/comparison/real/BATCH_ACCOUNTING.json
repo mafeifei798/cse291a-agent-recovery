@@ -1,0 +1,68 @@
+{
+  "expected_nano": "260245050.0000000",
+  "mode": "usage-priced-then-batch-reconciled",
+  "provider_invoice_verified": false,
+  "receipts": [
+    {
+      "number": 0,
+      "phase": "baseline",
+      "snapshot": {
+        "max_budget_nano": "50000000000.0",
+        "spend_nano": "256919300.0000000"
+      }
+    },
+    {
+      "number": 1,
+      "phase": "close",
+      "snapshot": {
+        "max_budget_nano": "50000000000.0",
+        "spend_nano": "260024300.0000000"
+      }
+    },
+    {
+      "number": 2,
+      "phase": "close",
+      "snapshot": {
+        "max_budget_nano": "50000000000.0",
+        "spend_nano": "260245050.00000000"
+      }
+    }
+  ],
+  "result": {
+    "automatic_expansion_allowed": false,
+    "close_GETs": 2,
+    "completed_workflow_outcomes_unchanged": true,
+    "elapsed_seconds": 8.643705260939896,
+    "expected_spend_nano": "260245050.0000000",
+    "local_priced_nano": 3325750,
+    "observations": [
+      {
+        "number": 0,
+        "phase": "baseline",
+        "snapshot": {
+          "max_budget_nano": "50000000000.0",
+          "spend_nano": "256919300.0000000"
+        }
+      },
+      {
+        "number": 1,
+        "phase": "close",
+        "snapshot": {
+          "max_budget_nano": "50000000000.0",
+          "spend_nano": "260024300.0000000"
+        }
+      },
+      {
+        "number": 2,
+        "phase": "close",
+        "snapshot": {
+          "max_budget_nano": "50000000000.0",
+          "spend_nano": "260245050.00000000"
+        }
+      }
+    ],
+    "old_holds_released": false,
+    "provider_invoice_verified": false,
+    "state": "aggregate_reconciled"
+  }
+}

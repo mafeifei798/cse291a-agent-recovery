@@ -1,0 +1,1 @@
+{"action":"accept","evidence_id":"LI01.PREFIX.node.0016","reason":"Current selection D1/LR achieves average_precision 0.17149, which is at or above the required_AP of 0.12685 and exceeds the constant_AP baseline of 0.10148, satisfying the quality goal."}

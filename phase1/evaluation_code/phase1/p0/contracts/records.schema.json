@@ -1,0 +1,1245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cse291a.local/p1/p0-v1/contracts/records.schema.json",
+  "title": "P0 frozen Phase 1 record envelopes",
+  "description": "Static P0 protocol. Cross-record identity, task arithmetic, hashes and temporal invariants require the standalone audit; no runtime implementation is provided. Use a named $defs reference when validating nested records.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/TaskManifest"
+    },
+    {
+      "$ref": "#/$defs/TrialManifest"
+    },
+    {
+      "$ref": "#/$defs/StepAudit"
+    },
+    {
+      "$ref": "#/$defs/TrialSummary"
+    },
+    {
+      "$ref": "#/$defs/StaticFixture"
+    }
+  ],
+  "$defs": {
+    "Request": {
+      "type": "object",
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "purpose": {
+          "const": "train"
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "requested_workers": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "dataset_id",
+        "purpose",
+        "batch_size",
+        "epochs",
+        "requested_workers"
+      ],
+      "additionalProperties": false
+    },
+    "InitialObject": {
+      "type": "object",
+      "properties": {
+        "object_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exists": {
+          "const": true
+        },
+        "payload": {
+          "type": "object"
+        },
+        "version": {
+          "const": 1
+        },
+        "last_writer_id": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "object_key",
+        "exists",
+        "payload",
+        "version",
+        "last_writer_id"
+      ],
+      "additionalProperties": false
+    },
+    "ObjectSnapshot": {
+      "type": "object",
+      "properties": {
+        "object_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exists": {
+          "type": "boolean"
+        },
+        "payload": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "last_writer_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "object_key",
+        "exists",
+        "payload",
+        "version",
+        "last_writer_id"
+      ],
+      "additionalProperties": false
+    },
+    "ParentInput": {
+      "type": "object",
+      "properties": {
+        "result_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "payload": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "result_id",
+        "payload"
+      ],
+      "additionalProperties": false
+    },
+    "SourceCarrierRef": {
+      "type": "object",
+      "properties": {
+        "object_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "object_key",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "ParentCarrierRef": {
+      "type": "object",
+      "properties": {
+        "result_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "payload_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "result_id",
+        "payload_digest"
+      ],
+      "additionalProperties": false
+    },
+    "PublicCarrier": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "carrier_kind": {
+              "const": "source_note"
+            },
+            "carrier_ref": {
+              "type": "object",
+              "properties": {
+                "object_key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "object_key",
+                "version"
+              ],
+              "additionalProperties": false
+            },
+            "untrusted_text": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "carrier_kind",
+            "carrier_ref",
+            "untrusted_text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "carrier_kind": {
+              "const": "handoff_note"
+            },
+            "carrier_ref": {
+              "type": "object",
+              "properties": {
+                "result_id": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "payload_digest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "result_id",
+                "payload_digest"
+              ],
+              "additionalProperties": false
+            },
+            "untrusted_text": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "carrier_kind",
+            "carrier_ref",
+            "untrusted_text"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PlanPayload": {
+      "type": "object",
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "num_examples": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "permission_allowed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "purpose",
+        "batch_size",
+        "epochs",
+        "num_examples",
+        "steps",
+        "workers",
+        "permission_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "ModelInputBundle": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/Request"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ParentInput"
+          },
+          "maxItems": 3
+        },
+        "tool_snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObjectSnapshot"
+          },
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "request",
+        "parents",
+        "tool_snapshots"
+      ],
+      "additionalProperties": false
+    },
+    "RenderInput": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "enum": [
+            "read_metadata",
+            "read_permission",
+            "read_resources",
+            "plan",
+            "execute"
+          ]
+        },
+        "input": {
+          "$ref": "#/$defs/ModelInputBundle"
+        },
+        "public_carriers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PublicCarrier"
+          },
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "step_id",
+        "input",
+        "public_carriers"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "step_id": {
+                "const": "read_metadata"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input": {
+                "properties": {
+                  "parents": {
+                    "maxItems": 0
+                  },
+                  "tool_snapshots": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "public_carriers": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "carrier_kind": {
+                      "const": "source_note"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "step_id": {
+                "enum": [
+                  "read_permission",
+                  "read_resources"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input": {
+                "properties": {
+                  "parents": {
+                    "maxItems": 0
+                  },
+                  "tool_snapshots": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "public_carriers": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "step_id": {
+                "const": "plan"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input": {
+                "properties": {
+                  "parents": {
+                    "minItems": 3
+                  },
+                  "tool_snapshots": {
+                    "maxItems": 0
+                  }
+                }
+              },
+              "public_carriers": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "carrier_kind": {
+                      "const": "handoff_note"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "step_id": {
+                "const": "execute"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input": {
+                "properties": {
+                  "parents": {
+                    "minItems": 1,
+                    "maxItems": 1
+                  },
+                  "tool_snapshots": {
+                    "maxItems": 0
+                  }
+                }
+              },
+              "public_carriers": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "system",
+            "user"
+          ]
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "TaskManifest": {
+      "type": "object",
+      "properties": {
+        "p1_schema_version": {
+          "const": "p1.0"
+        },
+        "protocol_version": {
+          "const": "p0-v1"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contract_id": {
+          "const": "p1.TaskManifest"
+        },
+        "task_id": {
+          "type": "string",
+          "pattern": "^p1-(dev|eval)-[0-9]{2}$"
+        },
+        "split": {
+          "enum": [
+            "dev",
+            "eval_core",
+            "eval_extension"
+          ]
+        },
+        "request": {
+          "$ref": "#/$defs/Request"
+        },
+        "initial_objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InitialObject"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "benign_notes": {
+          "type": "object",
+          "properties": {
+            "source_note": {
+              "type": "string",
+              "minLength": 1
+            },
+            "handoff_note": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "source_note",
+            "handoff_note"
+          ],
+          "additionalProperties": false
+        },
+        "task_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "p1_schema_version",
+        "protocol_version",
+        "campaign_id",
+        "contract_id",
+        "task_id",
+        "split",
+        "request",
+        "initial_objects",
+        "benign_notes",
+        "task_digest"
+      ],
+      "additionalProperties": false
+    },
+    "TrialManifest": {
+      "type": "object",
+      "properties": {
+        "p1_schema_version": {
+          "const": "p1.0"
+        },
+        "protocol_version": {
+          "const": "p0-v1"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contract_id": {
+          "const": "p1.TrialManifest"
+        },
+        "trial_key": {
+          "type": "string",
+          "pattern": "^p1-eval-(01|02|03|08)__(CLEAN|ERR|ADV|TMO|STL)__r0[123]__(BASE|VERIFY_STOP|FULL_RESTART)$"
+        },
+        "task_id": {
+          "enum": [
+            "p1-eval-01",
+            "p1-eval-02",
+            "p1-eval-03",
+            "p1-eval-08"
+          ]
+        },
+        "task_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_plan_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "condition": {
+          "enum": [
+            "CLEAN",
+            "ERR",
+            "ADV",
+            "TMO",
+            "STL"
+          ]
+        },
+        "repeat": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "policy": {
+          "enum": [
+            "BASE",
+            "VERIFY_STOP",
+            "FULL_RESTART"
+          ]
+        },
+        "parent_trial_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "model_binding_ref": {
+          "const": "manifests/model_binding.json"
+        },
+        "model_binding_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "prompt_revision": {
+          "const": "p1-model-v1"
+        },
+        "prompt_contract_ref": {
+          "const": "contracts/prompt_spec.json"
+        },
+        "config_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "fault_spec_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "fault_spec_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "run_id": {
+          "type": "null"
+        },
+        "branch_id": {
+          "type": "null"
+        },
+        "result_ids": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "call_ids": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "initial_call_ids": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "new_call_ids": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "actual_artifact_refs": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "call_cap": {
+          "const": 5
+        },
+        "token_caps": {
+          "type": "object",
+          "properties": {
+            "per_call_input": {
+              "const": 4000
+            },
+            "per_call_output": {
+              "const": 768
+            },
+            "max_new_input": {
+              "const": 20000
+            },
+            "max_new_output": {
+              "const": 3840
+            }
+          },
+          "required": [
+            "per_call_input",
+            "per_call_output",
+            "max_new_input",
+            "max_new_output"
+          ],
+          "additionalProperties": false
+        },
+        "sequence_index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "const": "not_started"
+        },
+        "authorization": {
+          "const": "not_authorized"
+        },
+        "not_started_reason": {
+          "const": "p0_protocol_only_not_authorized"
+        },
+        "future_artifact_root_template": {
+          "const": "phase1/runs/{campaign_id}/{trial_key}"
+        }
+      },
+      "required": [
+        "p1_schema_version",
+        "protocol_version",
+        "campaign_id",
+        "contract_id",
+        "trial_key",
+        "task_id",
+        "task_digest",
+        "source_plan_digest",
+        "condition",
+        "repeat",
+        "policy",
+        "parent_trial_key",
+        "model_binding_ref",
+        "model_binding_digest",
+        "prompt_revision",
+        "prompt_contract_ref",
+        "config_digest",
+        "fault_spec_ref",
+        "fault_spec_digest",
+        "run_id",
+        "branch_id",
+        "result_ids",
+        "call_ids",
+        "initial_call_ids",
+        "new_call_ids",
+        "actual_artifact_refs",
+        "call_cap",
+        "token_caps",
+        "sequence_index",
+        "status",
+        "authorization",
+        "not_started_reason",
+        "future_artifact_root_template"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "policy": {
+                "const": "FULL_RESTART"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "condition": {
+                "enum": [
+                  "ERR",
+                  "ADV",
+                  "TMO",
+                  "STL"
+                ]
+              },
+              "parent_trial_key": {
+                "type": "string",
+                "pattern": "^p1-eval-(01|02|03|08)__(ERR|ADV|TMO|STL)__r0[123]__BASE$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "parent_trial_key": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "condition": {
+                "const": "CLEAN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "fault_spec_ref": {
+                "type": "null"
+              },
+              "fault_spec_digest": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "fault_spec_ref": {
+                "type": "string",
+                "pattern": "^manifests/faults\\.private\\.json#/fault_specs/p1-eval-(01|02|03|08)__(ERR|ADV|TMO|STL)$"
+              },
+              "fault_spec_digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StepAudit": {
+      "type": "object",
+      "properties": {
+        "p1_schema_version": {
+          "const": "p1.0"
+        },
+        "protocol_version": {
+          "const": "p0-v1"
+        },
+        "contract_id": {
+          "const": "p1.StepAudit"
+        },
+        "audit_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trial_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "step_id": {
+          "enum": [
+            "read_metadata",
+            "read_permission",
+            "read_resources",
+            "plan",
+            "execute"
+          ]
+        },
+        "attempt_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "result_record_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "successful_result_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "call_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          },
+          "uniqueItems": true
+        },
+        "delivery_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          },
+          "uniqueItems": true
+        },
+        "render_input_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "rendered_messages_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_artifact_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "execution_status": {
+          "enum": [
+            "success",
+            "timeout",
+            "model_error",
+            "schema_error",
+            "dependency_error",
+            "stale_input",
+            "write_conflict",
+            "runtime_error",
+            "not_started"
+          ]
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "schema_valid": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "stage_semantic_valid": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "fresh_at_consume": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "authority_consistent_at_decision": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "schema_valid",
+            "stage_semantic_valid",
+            "fresh_at_consume",
+            "authority_consistent_at_decision"
+          ],
+          "additionalProperties": false
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "p1_schema_version",
+        "protocol_version",
+        "contract_id",
+        "audit_id",
+        "campaign_id",
+        "trial_key",
+        "step_id",
+        "attempt_id",
+        "result_record_id",
+        "successful_result_id",
+        "call_ids",
+        "delivery_ids",
+        "render_input_ref",
+        "rendered_messages_digest",
+        "raw_artifact_refs",
+        "execution_status",
+        "labels",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    "TrialSummary": {
+      "type": "object",
+      "properties": {
+        "p1_schema_version": {
+          "const": "p1.0"
+        },
+        "protocol_version": {
+          "const": "p0-v1"
+        },
+        "contract_id": {
+          "const": "p1.TrialSummary"
+        },
+        "summary_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trial_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "condition": {
+          "enum": [
+            "CLEAN",
+            "ERR",
+            "ADV",
+            "TMO",
+            "STL"
+          ]
+        },
+        "repeat": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "policy": {
+          "enum": [
+            "BASE",
+            "VERIFY_STOP",
+            "FULL_RESTART"
+          ]
+        },
+        "parent_trial_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "execution_status": {
+          "enum": [
+            "not_started",
+            "completed",
+            "failed",
+            "uncertain",
+            "campaign_stopped"
+          ]
+        },
+        "business_outcome": {
+          "enum": [
+            "correct",
+            "wrong_write",
+            "blocked",
+            "no_output",
+            "unknown"
+          ]
+        },
+        "injection_status": {
+          "enum": [
+            "not_applicable",
+            "not_reached",
+            "delivered"
+          ]
+        },
+        "model_exposed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "restart_status": {
+          "enum": [
+            "not_applicable",
+            "not_needed",
+            "not_eligible",
+            "ready",
+            "completed",
+            "failed",
+            "blocked",
+            "uncertain"
+          ]
+        },
+        "step_audit_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "metric_record_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "cost_record_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "timing_record_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "artifact_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "p1_schema_version",
+        "protocol_version",
+        "contract_id",
+        "summary_id",
+        "campaign_id",
+        "trial_key",
+        "task_id",
+        "condition",
+        "repeat",
+        "policy",
+        "parent_trial_key",
+        "execution_status",
+        "business_outcome",
+        "injection_status",
+        "model_exposed",
+        "restart_status",
+        "step_audit_refs",
+        "metric_record_ref",
+        "cost_record_ref",
+        "timing_record_ref",
+        "artifact_refs",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    "StaticFixture": {
+      "type": "object",
+      "properties": {
+        "p1_schema_version": {
+          "const": "p1.0"
+        },
+        "protocol_version": {
+          "const": "p0-v1"
+        },
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "const": "static_contract_fixture"
+        },
+        "clock_kind": {
+          "const": "synthetic_not_measured"
+        },
+        "task_id": {
+          "type": "string",
+          "pattern": "^p1-dev-0[1-4]$"
+        },
+        "trace": {
+          "type": "object"
+        },
+        "expected": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "p1_schema_version",
+        "protocol_version",
+        "sample_id",
+        "evidence_kind",
+        "clock_kind",
+        "task_id",
+        "trace",
+        "expected"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

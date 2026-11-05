@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+/runs/
+/supplements/phase1_safety_supplement/
+.env
+.env.*
+*.key
+*.pem
+/typesetting/*.aux
+/typesetting/*.log
+/typesetting/*.out
+/typesetting/main.pdf

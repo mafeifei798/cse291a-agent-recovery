@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "methods": [
+    {
+      "method": "FULL",
+      "outcome": "completed_execution",
+      "generations": 8,
+      "fits": 3,
+      "admissions": 0,
+      "new_known_nano": 1082450,
+      "prompt_tokens": 5243,
+      "completion_tokens": 592,
+      "recovery_wall_seconds": 48.502042969,
+      "parent_CPU_seconds": 4.911587973,
+      "fit_worker_CPU_seconds": 15.292425000000001,
+      "numeric_worker_CPU_seconds": 13.279494,
+      "worker_CPU_seconds": 28.571919,
+      "final_metrics": {
+        "accuracy": 0.8800679776644816,
+        "average_precision": 0.23059457719137316,
+        "f1": 0.0,
+        "log_loss": 0.3578270110203564,
+        "roc_auc": 0.673282981990786
+      }
+    },
+    {
+      "method": "CONSERVATIVE",
+      "outcome": "completed_execution",
+      "generations": 8,
+      "fits": 3,
+      "admissions": 0,
+      "new_known_nano": 1077550,
+      "prompt_tokens": 5257,
+      "completion_tokens": 578,
+      "recovery_wall_seconds": 47.692197087,
+      "parent_CPU_seconds": 4.996734133,
+      "fit_worker_CPU_seconds": 15.917134,
+      "numeric_worker_CPU_seconds": 13.268861,
+      "worker_CPU_seconds": 29.185995,
+      "final_metrics": {
+        "accuracy": 0.8800679776644816,
+        "average_precision": 0.23059457719137316,
+        "f1": 0.0,
+        "log_loss": 0.3578270110203564,
+        "roc_auc": 0.673282981990786
+      }
+    },
+    {
+      "method": "CUTOFF",
+      "outcome": "completed_execution",
+      "generations": 8,
+      "fits": 0,
+      "admissions": 3,
+      "new_known_nano": 1165750,
+      "prompt_tokens": 5245,
+      "completion_tokens": 758,
+      "recovery_wall_seconds": 29.036943584,
+      "parent_CPU_seconds": 2.3374947,
+      "fit_worker_CPU_seconds": 0,
+      "numeric_worker_CPU_seconds": 13.280037,
+      "worker_CPU_seconds": 13.280037,
+      "final_metrics": {
+        "accuracy": 0.8800679776644816,
+        "average_precision": 0.23059457719137316,
+        "f1": 0.0,
+        "log_loss": 0.3578270110203564,
+        "roc_auc": 0.673282981990786
+      }
+    }
+  ],
+  "GEN": 24,
+  "GET": 5,
+  "new_known_nano": 3325750,
+  "new_held_nano": 0,
+  "batch_elapsed_seconds": 134.565639364,
+  "batch_close_seconds": 8.643705260939896,
+  "CUTOFF_wall_saving_vs_FULL": 0.4013253503041323,
+  "CUTOFF_worker_CPU_saving_vs_FULL": 0.5352066831772833,
+  "CUTOFF_API_cost_change_vs_FULL": 0.07695505566076966,
+  "new_real_history_calls": 388,
+  "project_dispatches_after": 2866,
+  "project_known_nano": 259950150,
+  "L_known_nano": 10067300,
+  "provider_key_cap_nano": "50000000000.0",
+  "provider_key_spend_before_nano": "256919300.0000000",
+  "provider_key_spend_after_nano": "260245050.00000000",
+  "provider_remaining_nano": "49739754950.00000000",
+  "provider_invoice_verified": false,
+  "old_holds_unchanged": true,
+  "raw_timing_static_scripted_label_is_inapplicable": true,
+  "actual_transport_proven_by": "24 unique settled real receipts plus counted official POSTs; raw timing label left unchanged",
+  "limitation": "One saved scene, one ordered run per method; no variability or generalization claim."
+}

@@ -1,0 +1,1 @@
+{"contract_sha256":"2805469edc62df71972681a336ae6bec126267feb18e857514356b194fe5a8d4","cpu_fixture_only":false,"llm_fixture_only":false,"outer_metrics":{"accuracy":0.8800679776644816,"average_precision":0.23059457719137316,"f1":0.0,"log_loss":0.3578270110203564,"roc_auc":0.673282981990786},"producer_id":"fit-0006","selection":{"bundle":"D1","recipe":"LR"}}

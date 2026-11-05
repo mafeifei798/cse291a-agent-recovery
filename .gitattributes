@@ -1,0 +1,6 @@
+* -text
+*.pdf binary
+*.npy binary
+*.sqlite binary
+*.gz binary
+*.zip binary

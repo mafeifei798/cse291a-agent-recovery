@@ -1,0 +1,214 @@
+{
+  "p1_schema_version": "p1.0",
+  "protocol_version": "p0-v1",
+  "campaign_id": "p1-core-v1-pending",
+  "contract_id": "p1.Protocol",
+  "protocol_status": "p0_static_frozen",
+  "source_plan_ref": "../../outputs/phase1_execution_plan.md",
+  "source_plan_ref_base": "phase1/p0",
+  "source_plan_digest": "d0dec0d2224dd0b1e7d67d7be2c71837ecc156f4980aa6c84b95e69d72bb847b",
+  "source_s6_release_id": "0b5efd1d2f45750bb6fbb1f901b04628ba00be5436a5166876ebbbc039eaf6eb",
+  "execution_authorization": "not_authorized",
+  "implementation_phase_entered": false,
+  "real_api_calls_made_by_this_pack": 0,
+  "created_records_are": "static_definitions_and_illustrative_samples_only",
+  "core_task_ids": [
+    "p1-eval-01",
+    "p1-eval-02",
+    "p1-eval-03",
+    "p1-eval-08"
+  ],
+  "extension_task_ids": [
+    "p1-eval-04",
+    "p1-eval-05",
+    "p1-eval-06",
+    "p1-eval-07"
+  ],
+  "extension_enabled": false,
+  "development_task_ids": [
+    "p1-dev-01",
+    "p1-dev-02",
+    "p1-dev-03",
+    "p1-dev-04"
+  ],
+  "conditions": [
+    "CLEAN",
+    "ERR",
+    "ADV",
+    "TMO",
+    "STL"
+  ],
+  "initial_policies": [
+    "BASE",
+    "VERIFY_STOP"
+  ],
+  "recovery_policy": "FULL_RESTART",
+  "repeats": [
+    1,
+    2,
+    3
+  ],
+  "workflow_steps": [
+    "read_metadata",
+    "read_permission",
+    "read_resources",
+    "plan",
+    "execute"
+  ],
+  "matrix": {
+    "BASE": {
+      "slots": 60,
+      "new_calls_cap": 300
+    },
+    "VERIFY_STOP": {
+      "slots": 60,
+      "new_calls_cap": 300
+    },
+    "FULL_RESTART": {
+      "slots": 48,
+      "new_calls_cap": 240
+    },
+    "total_slots": 168,
+    "formal_new_calls_cap": 840,
+    "pilot_new_calls_cap": 71,
+    "stage_new_calls_cap": 911,
+    "optional_extension_total_slots": 336,
+    "optional_extension_formal_new_calls_cap": 1680,
+    "optional_extension_stage_new_calls_cap": 1751,
+    "pilot_slots_are_not_in_formal_trials_jsonl": true
+  },
+  "execution_order": {
+    "outer": [
+      "repeat_ascending",
+      "task_id_ascending",
+      "condition_order"
+    ],
+    "condition_order": [
+      "CLEAN",
+      "ERR",
+      "ADV",
+      "TMO",
+      "STL"
+    ],
+    "if_task_no_plus_repeat_even": [
+      "BASE",
+      "FULL_RESTART_if_non_CLEAN",
+      "VERIFY_STOP"
+    ],
+    "otherwise": [
+      "VERIFY_STOP",
+      "BASE",
+      "FULL_RESTART_if_non_CLEAN"
+    ],
+    "base_and_parented_restart_must_be_contiguous": true
+  },
+  "recovery": {
+    "max_rounds": 1,
+    "initial_call_cap": 5,
+    "new_call_cap": 5,
+    "logical_run_call_cap": 10,
+    "evaluation_assisted_trigger": true,
+    "runtime_receives_correct_fields": false,
+    "requires_certain_terminal_no_active": true,
+    "unknown_commit_or_usage": "pause_campaign",
+    "zero_success_results_allowed": true,
+    "zero_effects_allowed": true,
+    "compensate_only_owned_applied_effects": true,
+    "zero_effects_compensation": "no_op_receipt_no_fabricated_effect",
+    "old_success_results": "retained_history_never_adopted_by_replay",
+    "late_tmo_reply": "drain_and_reject_outside_frozen_database_before_restart",
+    "tool_timeout_failed_result_payload": null,
+    "tool_timeout_failed_step_model_call_ids": [],
+    "preserve_source_versions_and_legal_updates": true,
+    "preserve_campaign_ledger_and_consumption": true,
+    "replay_steps": [
+      "read_metadata",
+      "read_permission",
+      "read_resources",
+      "plan",
+      "execute"
+    ],
+    "disable_once_fault_in_replay": true
+  },
+  "model_binding_ref": "manifests/model_binding.json",
+  "model_binding_digest": "64966b56ed59b5c4185a416f2c8ddc914a6764f7463b53c6c0456e1ba8b15bab",
+  "prompt_contract_ref": "contracts/prompt_spec.json",
+  "prompt_revision": "p1-model-v1",
+  "path_rules": {
+    "manifest_reference_base": "phase1/p0",
+    "actual_artifact_refs": "empty until artifacts are actually produced",
+    "future_artifact_root_template_base": "project_root",
+    "future_artifact_root_template_is_existing_path": false,
+    "source_plan_project_relative_path": "outputs/phase1_execution_plan.md"
+  },
+  "old_contract_compatibility": {
+    "request_fields": [
+      "dataset_id",
+      "purpose",
+      "batch_size",
+      "epochs",
+      "requested_workers"
+    ],
+    "object_snapshot_fields": [
+      "object_key",
+      "exists",
+      "payload",
+      "version",
+      "last_writer_id"
+    ],
+    "object_snapshot_field_count": 5,
+    "note": "The previous plan phrase six-field snapshot was a wording error; the exact existing contract has five fields. No field is added.",
+    "old_task_spec_schema_version": "1.1",
+    "p1_wrapper_schema_version": "p1.0",
+    "business_bundle_fields": [
+      "request",
+      "parents",
+      "tool_snapshots"
+    ],
+    "p1_notes_outside_business_payload": true
+  },
+  "digest_rules": {
+    "algorithm": "sha256",
+    "canonical_json": "json.dumps(value,sort_keys=True,separators=(\",\",\":\"),ensure_ascii=False).encode(\"utf-8\")",
+    "self_digest": "Exclude only the self digest key before hashing the remaining full object.",
+    "jsonl_logical_digest": "Hash the parsed ordered array of JSONL records with canonical_json.",
+    "raw_file_digest": "SHA256 exact bytes, for source_plan_digest and the root seal file inventory; explicitly distinguished from canonical JSON digests.",
+    "text_digest": "Hash the JSON string using canonical_json, not raw text bytes."
+  },
+  "manifest_content_digests": {
+    "tasks.json": "0c108e7f81ff4143348c5d7e47825f70456f27dab6c37b3a08d7f8546e0c1d56",
+    "faults.private.json": "80963ffd282f6fbbdd19f38f37183622b27f32e2d746aaffa27892c86f5c2982",
+    "private_truth.json": "fc4b3dd0e6a125ee420bec1eddbc5cdfd5512c4e27f2e9acc2ac477991e1082c",
+    "model_binding.json": "64966b56ed59b5c4185a416f2c8ddc914a6764f7463b53c6c0456e1ba8b15bab",
+    "trials.jsonl_ordered_array": "7adfbe604f393657995cf08f14896cd5c704197b19240afd57dc06df7d31f02e"
+  },
+  "proposed_budget": {
+    "currency": "USD",
+    "stage_cap": 10,
+    "pilot_subcap": 1,
+    "authorization": "not_authorized",
+    "actual_usage": null,
+    "actual_cost": null
+  },
+  "formal_token_caps": {
+    "input": 3360000,
+    "output": 645120
+  },
+  "stage_token_caps_including_pilot": {
+    "input": 3644000,
+    "output": 699648
+  },
+  "metrics_counts": {
+    "core_distinct_tasks": 4,
+    "trials_per_condition_per_initial_policy": 12,
+    "trials_per_parity_per_condition_per_initial_policy": 6,
+    "repeats_are_independent_tasks": false
+  },
+  "limitations": [
+    "One synthetic five-step workflow, four parameter instances in the core evaluation.",
+    "Three repeats measure only preliminary variability.",
+    "No real model, usage, price, request, run, result or effect is asserted by P0.",
+    "TMO uses a controlled synchronous deadline and drain, not arbitrary concurrent late-reply interleavings."
+  ],
+  "protocol_digest": "1f69468505aef07288d632d546cc19ffafe1705e3f2cf933cea427c060475cc5"
+}

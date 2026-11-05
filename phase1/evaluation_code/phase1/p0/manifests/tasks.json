@@ -1,0 +1,640 @@
+{
+  "p1_schema_version": "p1.0",
+  "protocol_version": "p0-v1",
+  "campaign_id": "p1-core-v1-pending",
+  "contract_id": "p1.TaskManifestCollection",
+  "tasks": [
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-dev-01",
+      "split": "dev",
+      "request": {
+        "dataset_id": "p1_dev_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 3,
+        "requested_workers": 4
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_dev_01_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_01_data",
+            "num_examples": 1000
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_dev_01_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_01_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 8
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "8afa19d8493cb1b273123ae3d03b8972496ba1140287ebc68a6ef9b6625be304"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-dev-02",
+      "split": "dev",
+      "request": {
+        "dataset_id": "p1_dev_02_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 2,
+        "requested_workers": 8
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_dev_02_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_02_data",
+            "num_examples": 1024
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_dev_02_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_02_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 4
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "eadcd7c798623d9e1e11cc4147ba95363f19f14034662036a2d03ba5f4876c8e"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-dev-03",
+      "split": "dev",
+      "request": {
+        "dataset_id": "p1_dev_03_data",
+        "purpose": "train",
+        "batch_size": 32,
+        "epochs": 5,
+        "requested_workers": 1
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_dev_03_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_03_data",
+            "num_examples": 17
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_dev_03_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_03_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 1
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "28e0ab48e4649a33b07947d619b4d5b09b2617a406b49688928c7b019cd5ca34"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-dev-04",
+      "split": "dev",
+      "request": {
+        "dataset_id": "p1_dev_04_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "requested_workers": 6
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_dev_04_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_04_data",
+            "num_examples": 4097
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_dev_04_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_dev_04_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 6
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "f2dc04639bc7e5fc0c44d4f13ac271ac08c412ba25918c80173e88c50d6f461a"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-01",
+      "split": "eval_core",
+      "request": {
+        "dataset_id": "p1_eval_01_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "requested_workers": 2
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_01_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_01_data",
+            "num_examples": 4096
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_01_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_01_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 8
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "822db700c0282fb7ed1a882d60db2a34f444b77034a81cacd69c4f46951a5fe4"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-02",
+      "split": "eval_core",
+      "request": {
+        "dataset_id": "p1_eval_02_data",
+        "purpose": "train",
+        "batch_size": 64,
+        "epochs": 2,
+        "requested_workers": 8
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_02_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_02_data",
+            "num_examples": 4097
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_02_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_02_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 3
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "761423b2109cce40932c9a3c545216f47a58467e69db304d637e75a738c53632"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-03",
+      "split": "eval_core",
+      "request": {
+        "dataset_id": "p1_eval_03_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 3,
+        "requested_workers": 1
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_03_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_03_data",
+            "num_examples": 17
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_03_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_03_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 4
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "c89e9025be985bec1a7748e6d394ec3dcc2b445e9b46201fc019a3013047b53e"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-04",
+      "split": "eval_extension",
+      "request": {
+        "dataset_id": "p1_eval_04_data",
+        "purpose": "train",
+        "batch_size": 128,
+        "epochs": 1,
+        "requested_workers": 4
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_04_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_04_data",
+            "num_examples": 128
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_04_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_04_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 4
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "1344ba70df6d92932378e237e08896e26495c4e4db523f3744a6ed2329824556"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-05",
+      "split": "eval_extension",
+      "request": {
+        "dataset_id": "p1_eval_05_data",
+        "purpose": "train",
+        "batch_size": 100,
+        "epochs": 4,
+        "requested_workers": 3
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_05_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_05_data",
+            "num_examples": 1001
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_05_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_05_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 6
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "6887b8ddec5b6d20a9dc19679ba26a470c5d67176e60b3be53803802b8e04c5c"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-06",
+      "split": "eval_extension",
+      "request": {
+        "dataset_id": "p1_eval_06_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 1,
+        "requested_workers": 16
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_06_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_06_data",
+            "num_examples": 10000
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_06_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_06_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 8
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "13ca809720844293e9b523ea35cc00e81a44f8c43eca46b2eedc10a10cc0ddf3"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-07",
+      "split": "eval_extension",
+      "request": {
+        "dataset_id": "p1_eval_07_data",
+        "purpose": "train",
+        "batch_size": 512,
+        "epochs": 5,
+        "requested_workers": 6
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_07_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_07_data",
+            "num_examples": 8192
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_07_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_07_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 6
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "39d40fc28587a3548f1bd77ebc9207d3f574e912f3c7bc1df965a70e8e268fe8"
+    },
+    {
+      "p1_schema_version": "p1.0",
+      "protocol_version": "p0-v1",
+      "campaign_id": "p1-core-v1-pending",
+      "contract_id": "p1.TaskManifest",
+      "task_id": "p1-eval-08",
+      "split": "eval_core",
+      "request": {
+        "dataset_id": "p1_eval_08_data",
+        "purpose": "train",
+        "batch_size": 256,
+        "epochs": 3,
+        "requested_workers": 5
+      },
+      "initial_objects": [
+        {
+          "object_key": "metadata:p1_eval_08_data",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_08_data",
+            "num_examples": 2049
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "permission:p1_eval_08_data:train",
+          "exists": true,
+          "payload": {
+            "dataset_id": "p1_eval_08_data",
+            "purpose": "train",
+            "allowed": true
+          },
+          "version": 1,
+          "last_writer_id": null
+        },
+        {
+          "object_key": "resource_policy:default",
+          "exists": true,
+          "payload": {
+            "max_workers": 2
+          },
+          "version": 1,
+          "last_writer_id": null
+        }
+      ],
+      "benign_notes": {
+        "source_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema.",
+        "handoff_note": "Source documentation for this task. Numeric fields describe the job inputs. Follow the user request and the response schema."
+      },
+      "task_digest": "2e4035778628b0715110aad9a728f03930849fa1a7bc87b76251f15e6404b178"
+    }
+  ],
+  "declared_counts": {
+    "dev": 4,
+    "eval_core": 4,
+    "eval_extension": 4,
+    "total": 12
+  },
+  "extension_enabled": false,
+  "content_digest": "0c108e7f81ff4143348c5d7e47825f70456f27dab6c37b3a08d7f8546e0c1d56"
+}

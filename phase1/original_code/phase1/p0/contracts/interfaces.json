@@ -1,0 +1,397 @@
+{
+  "p1_schema_version": "p1.0",
+  "protocol_version": "p0-v1",
+  "artifact_kind": "frozen_module_interfaces",
+  "implemented": false,
+  "scope": "P0 static protocol only; no runtime module, API request, cloud resource or workflow run.",
+  "source_plan_digest": "d0dec0d2224dd0b1e7d67d7be2c71837ecc156f4980aa6c84b95e69d72bb847b",
+  "record_schema_ref": "records.schema.json",
+  "prompt_contract_ref": "prompt_spec.json",
+  "interfaces": {
+    "render_p1": {
+      "owner": "A",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Render only the allowed business bundle and low-trust carriers; bind the exact bytes to the call sidecar.",
+      "inputs": {
+        "step_id": "one of five fixed steps",
+        "input_bundle": "records.schema.json#/$defs/ModelInputBundle; exact request/parents/tool_snapshots",
+        "public_carriers": "array of records.schema.json#/$defs/PublicCarrier; step-specific placement",
+        "prompt_revision": "must equal p1-model-v1"
+      },
+      "outputs": {
+        "messages": "exact two-message system/user list defined in prompt_spec.json",
+        "bundle_digest": "SHA256 canonical bundle",
+        "public_carriers_digest": "SHA256 canonical carrier array",
+        "rendered_messages_digest": "SHA256 canonical messages",
+        "prompt_spec_digest": "SHA256 raw prompt_spec.json bytes"
+      },
+      "error_codes": [
+        "PROMPT_REVISION_UNKNOWN",
+        "INVALID_BUNDLE",
+        "INVALID_CARRIER",
+        "CARRIER_REF_MISMATCH",
+        "PRIVATE_CONTEXT_LEAK",
+        "MESSAGE_DIGEST_MISMATCH"
+      ],
+      "invariants": [
+        "All five conditions use the same template. Only the authorized carrier text changes in ADV.",
+        "Carrier is a separate P1 sidecar; legacy business bundle and StepResult input_snapshot gain no fields.",
+        "source_note binds captured metadata key/version; handoff_note binds actual selected metadata result ID/payload digest.",
+        "No provider/model selection or API invocation occurs in rendering.",
+        "Unknown revision or missing P1 sidecar blocks verification; preserve S6 renderer and Oracle."
+      ],
+      "boundary_examples": [
+        "Neutral and attack messages must reconstruct byte-for-byte from the same allowed business input; conditions/event IDs never render.",
+        "Failed TMO has no rendering or model call for the failed attempt."
+      ]
+    },
+    "delivery.prepare": {
+      "owner": "B",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Apply a single registered delivery event at a narrow Workflow boundary without creating model answers.",
+      "inputs": {
+        "ctx": "campaign/trial/run/branch IDs, step_id, attempt_id, attempt_no, recovery_round, hook_name; audit only",
+        "captured": "captured declared tool snapshot or structurally valid model candidate; actual selected parent IDs as needed",
+        "fault_spec": "private registered spec; only initial target attempt eligible",
+        "pending_delivery": "at most one controlled TMO pending record; explicit synthetic/measured clock"
+      },
+      "outputs": {
+        "status": "delivered | tool_timeout | not_reached",
+        "delivered_payload": "actual unchanged/replaced candidate or captured snapshot; null on timeout",
+        "public_carriers": "approved carrier array, never the whole P1Delivery",
+        "audit_ref": "append-only P1Delivery/event record outside frozen scene",
+        "tool_payload_delivered": "boolean",
+        "timeout_event_delivered": "boolean",
+        "failed_attempt_id": "exact attempt ID on timeout, otherwise null",
+        "faulty_result_id": "successful fault-entry result ID when one exists; null for TMO",
+        "pending_delivery_ref": "reference or null"
+      },
+      "error_codes": [
+        "DELIVERY_IDENTITY_MISMATCH",
+        "FAULT_ALREADY_CONSUMED",
+        "INVALID_TRIGGER",
+        "INVALID_PAYLOAD",
+        "ATTEMPT_CLOSED",
+        "LATE_REPLY_REJECTED",
+        "PRIVATE_CONTEXT_LEAK"
+      ],
+      "invariants": [
+        "No hidden answer correction, synthetic successful result or model fallback. ERR retains private original, delivered output and downstream messages agree.",
+        "TMO deadline=1s and reply=2s from capture; close exact attempt at deadline, payload=null and zero model calls for that attempt.",
+        "TMO model_exposed=null means N/A; tool_payload_delivered=false and timeout_event_delivered=true.",
+        "STL logs capture(v1)<update(v2)<deliver(v1), retaining actual v1 provenance.",
+        "Late audit lives outside frozen scene DB; no late result publication, extra request, effect or scene mutation.",
+        "One initial injection; recovery uses neutral text and retains legitimate v2 update."
+      ],
+      "boundary_examples": [
+        "dev-01 metadata TMO may close with zero successful results, zero effects, zero calls.",
+        "Natural failure before target returns not_reached; it is not evidence that a defense stopped the registered fault."
+      ]
+    },
+    "runtime_verifier.check": {
+      "owner": "B",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Check a published query/plan with legal current source reads before adoption by a downstream step.",
+      "inputs": {
+        "candidate_ref": "actual published successful query or plan result and immutable candidate bytes",
+        "request": "public five-field request",
+        "source_reader": "legal read-only current-source reader; no private truth/FaultSpec/initial_checker"
+      },
+      "outputs": {
+        "decision": "accept | reject",
+        "read_refs": "each actual object_key/version and read time",
+        "reason_codes": "business/identity/freshness rules violated",
+        "logical_read_count": "actual extra reads; normally 1 per query, 3 for plan",
+        "elapsed_ms": "measured verifier interval, not model time",
+        "candidate_unchanged_digest": "digest proving no fix was written"
+      },
+      "error_codes": [
+        "VERIFIER_READ_FAILED",
+        "VERIFIER_IDENTITY_MISMATCH",
+        "VERIFIER_EVIDENCE_MISSING"
+      ],
+      "invariants": [
+        "No model call, answer repair, automatic restart, private fault lookup or call to C checker.",
+        "Reject is a runner status distinct from model response status; Store guards remain enabled.",
+        "Run on CLEAN too; natural incorrect model output correctly rejected is not a verifier false positive.",
+        "Expected full normal path adds six logical reads; internal Store SQL checks remain separately counted."
+      ],
+      "boundary_examples": [
+        "STL captured v1 while current v2 is rejected before downstream adoption; no fake model_error.",
+        "ADV ignored with a correct candidate can accept."
+      ]
+    },
+    "initial_checker.evaluate": {
+      "owner": "C",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Early read-only evaluation decides restart eligibility using recorded initial evidence; this is evaluation assistance, not online agent defense.",
+      "inputs": {
+        "task_manifest": "public task/request and source definitions",
+        "initial_evidence": "closed BASE attempt/result/effect/operation/call records plus delivery audit",
+        "fault_identity_ref": "registered event and actual reached identity; private evaluation only",
+        "authority_timeline": "source state at capture/consume/commit/final; preserve legal updates"
+      },
+      "outputs": {
+        "correctness": "correct | incorrect | unknown",
+        "restart_eligible": "boolean",
+        "reason_codes": "explicit admissibility/rejection reasons",
+        "fault_identity": "condition/event_id/step_id/attempt_id; failed_attempt_id or successful faulty_result_id, never a fabricated success",
+        "terminal_certain": "boolean",
+        "answer_payload": "absent; no correct numeric field is returned"
+      },
+      "error_codes": [
+        "CHECKER_EVIDENCE_MISSING",
+        "CHECKER_IDENTITY_MISMATCH",
+        "CHECKER_TIME_ORDER_UNKNOWN"
+      ],
+      "invariants": [
+        "Eligible only BASE fault condition, delivered event, incorrect/incomplete task, certain closed state, no active attempt and no unknown operation/call settlement.",
+        "TMO event delivery is sufficient; tool payload/model exposure is not required. TMO faulty_result_id=null even if failed StepResult has an ID.",
+        "correct means no restart; not_reached means no eligibility; unknown means quarantine and no restart.",
+        "No correct values are fed back into runner, verifier, model or lifecycle."
+      ],
+      "boundary_examples": [
+        "Zero-call metadata TMO is incorrect/no_output with a known failed attempt, eligible at the delivered t=1s deadline; only begin_restart admission waits for the t=2s drain.",
+        "Provider timeout without settled usage is unknown and must pause campaign, not receive a TMO retry."
+      ]
+    },
+    "lifecycle.freeze": {
+      "owner": "A",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Seal an exact known terminal initial scene, including a partial prefix with no output.",
+      "inputs": {
+        "ctx": "BASE identity, task/config/plan digests and campaign_budget_ref",
+        "terminal_evidence": "attempts closed; operation and model ledger state certain",
+        "fault_identity": "event/target attempt and optional successful faulty_result_id; TMO failed_attempt_id required",
+        "scene_material": "current objects, full result/attempt/effect refs, occurred events, ledger refs, selected results, pending delivery ref"
+      },
+      "outputs": {
+        "status": "frozen | blocked | uncertain",
+        "scene_id": "stable ID on first success; same request returns same scene",
+        "scene_digest": "hash of immutable scene material; excludes later outside-scene delivery audit",
+        "scene_kind": "completed_run | partial_failure",
+        "successful_result_ids": "possibly empty",
+        "effect_ids": "possibly empty",
+        "failed_attempt_ids": "actual failed IDs, possibly empty",
+        "campaign_budget_ref": "unchanged external campaign ledger",
+        "freeze_monotonic_s": "captured checkpoint time",
+        "reason_codes": "explicit refusal or receipt"
+      },
+      "error_codes": [
+        "ACTIVE_ATTEMPT",
+        "UNCERTAIN_COMMIT",
+        "UNCERTAIN_CALL_SETTLEMENT",
+        "SCENE_IDENTITY_MISMATCH",
+        "SCENE_DIGEST_MISMATCH",
+        "UNKNOWN_TERMINAL_STATE"
+      ],
+      "invariants": [
+        "Zero successful results, zero effects and zero calls are valid; do not require Scenario.run_to_notice or legacy FaultNotice.",
+        "TMO deadline closes attempt then freezes at t=1s; the scheduled late reply is a pending external delivery, not an active Workflow attempt.",
+        "Reject active or uncertain scenes. No killing other workers or fabricating closure.",
+        "Retain source v2, old results and calls, receipts and remaining budget.",
+        "Duplicate identical freeze request returns same receipt; altered identity/digest is refused.",
+        "Freeze is immutable; later external late-rejection audit must not change scene_digest."
+      ],
+      "boundary_examples": [
+        "dev-01 first metadata TMO -> partial_failure, successful_result_ids=[], effect_ids=[], model_calls=[] is admissible.",
+        "An active model attempt or unknown commit -> blocked/uncertain, no restart context."
+      ]
+    },
+    "lifecycle.begin_restart": {
+      "owner": "A",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Admit at most one full-restart branch from a frozen scene after controlled pending delivery has drained.",
+      "inputs": {
+        "restart_request_id": "stable idempotency key, retained on duplicate notice",
+        "scene_ref": "scene_id and scene_digest from successful freeze",
+        "checker_decision": "eligible=true with matching initial identities; no answers",
+        "drain_receipt": "matching pending delivery closed by rejected late reply; drain_complete_after_frozen=true",
+        "campaign_budget_ref": "same non-copied ledger reference",
+        "requested_recovery_round": "must equal 1"
+      },
+      "outputs": {
+        "status": "ready | already_started | blocked | uncertain",
+        "branch_id": "one stable new branch; same request returns same ID",
+        "parent_trial_key": "source BASE slot",
+        "recovery_trial_key": "pre-registered matching FULL_RESTART slot",
+        "recovery_round": "1",
+        "compensation_status": "skipped_no_effects | compensated | conflict | uncertain",
+        "compensation_effect_ids": "only original owned applied output groups; [] for zero effects",
+        "reused_result_ids": "always []",
+        "replay_steps": "five steps in fixed order",
+        "campaign_budget_ref": "same as frozen scene",
+        "additional_call_cap": "5",
+        "initial_call_ids": "preserved inherited IDs, not charged again",
+        "new_call_ids": "initially []; real/fake downstream admissions append separately",
+        "reason_codes": "why admitted/refused"
+      },
+      "error_codes": [
+        "DRAIN_INCOMPLETE",
+        "RESTART_NOT_ELIGIBLE",
+        "RESTART_ROUND_LIMIT",
+        "RESTART_IDENTITY_MISMATCH",
+        "BUDGET_REFERENCE_MISMATCH",
+        "COMPENSATION_CONFLICT",
+        "UNCERTAIN_COMMIT",
+        "UNCERTAIN_CALL_SETTLEMENT",
+        "SCENE_DIGEST_MISMATCH"
+      ],
+      "invariants": [
+        "TMO begin_restart occurs only after t=2s late reply rejected outside scene and drain receipt persisted; freeze remains t=1s.",
+        "Zero effect uses skipped_no_effects with no compensation operation or invented effect.",
+        "New branch does not reuse any initial successful result; B runs all five steps from metadata, selecting only new branch results.",
+        "Historical result/call records retained, source versions not reset, campaign budget not copied/reset.",
+        "Per-step attempt_no increments independently; it is not recovery_round+1 globally. For dev-01 metadata TMO, replay metadata attempt_no=2 and other four steps attempt_no=1.",
+        "One recovery_round only. Replay failure stops; duplicate notice/request returns stable already_started without a new branch/request/effect.",
+        "Already_started may return history refs but performs no model call. Unknown status/compensation conflict prevents replay."
+      ],
+      "boundary_examples": [
+        "Before drain: DRAIN_INCOMPLETE and zero new branch/calls. After drain: ready, skipped_no_effects, reuse=[] and five-step replay authorized offline only.",
+        "Repeated notification and repeated begin_restart -> same branch and call/effect counts unchanged."
+      ]
+    },
+    "campaign.reserve_call": {
+      "owner": "A",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Atomically reserve one dispatch and its worst-case token/cost cap in the single external campaign ledger.",
+      "inputs": {
+        "campaign_budget_ref": "one SQLite ledger outside branch scene DBs",
+        "call_id": "stable unique physical call UUID",
+        "trial_key": "one registered slot",
+        "attempt_id": "actual live attempt",
+        "reservation": "one call, input<=4000, output<=768 plus configured monetary cap when known",
+        "mode": "offline_fake only until explicit real authorization and model binding"
+      },
+      "outputs": {
+        "status": "reserved | already_reserved | denied | uncertain",
+        "reservation_id": "stable reservation",
+        "remaining": "post-reservation campaign/slot allowance",
+        "dispatch_allowed": "true only with certain persisted reservation and matching explicit authorization"
+      },
+      "error_codes": [
+        "CALL_CAP_EXCEEDED",
+        "TOKEN_CAP_EXCEEDED",
+        "MONEY_CAP_EXCEEDED",
+        "MODEL_BINDING_UNRESOLVED",
+        "NOT_AUTHORIZED",
+        "LEDGER_PERSISTENCE_FAILED",
+        "UNKNOWN_SETTLEMENT"
+      ],
+      "invariants": [
+        "Single process, concurrency=1, no distributed scheduler or automatic crash recovery.",
+        "S6 per-run counter is insufficient; initial/replay share one campaign reservation pool.",
+        "No new reservation on duplicate call_id; no dispatch before durable reservation.",
+        "Current P0 fixtures create no provider calls and confer no live authorization."
+      ],
+      "boundary_examples": [
+        "Copying a frozen scene changes no campaign balances.",
+        "Unresolved model/rate or a prior uncertain reservation pauses rather than assuming free usage."
+      ]
+    },
+    "campaign.settle_call": {
+      "owner": "A",
+      "status": "frozen_spec_not_implemented",
+      "purpose": "Persist actual usage and reconcile reservation without hiding unknown consumption.",
+      "inputs": {
+        "campaign_budget_ref": "same ledger",
+        "reservation_id": "prior durable reservation",
+        "call_id": "exact reserved call",
+        "outcome": "returned response/transport status and actual message digest",
+        "usage": "provider reported input/output or null if unknown",
+        "model_identity": "actual model/version when available"
+      },
+      "outputs": {
+        "status": "settled_known | settlement_unknown | already_settled",
+        "known_usage": "verified numeric values only",
+        "unknown_call_ids": "preserved unresolved physical calls",
+        "campaign_pause": "true on uncertain/missing usage or ledger failure"
+      },
+      "error_codes": [
+        "USAGE_MISSING",
+        "USAGE_INVALID",
+        "SETTLEMENT_DIGEST_MISMATCH",
+        "LEDGER_PERSISTENCE_FAILED",
+        "REAL_HTTP_TIMEOUT"
+      ],
+      "invariants": [
+        "Never set unknown usage to zero or reset budget after replay.",
+        "Identical repeated settlement is a no-op; differing evidence for same call is a mismatch.",
+        "Physical campaign costs deduplicate by call_id; logical BASE+FULL_RESTART cost includes original+new IDs once each.",
+        "No automatic provider retry; HTTP timeout/rate/server/auth/model mismatch pauses campaign."
+      ],
+      "boundary_examples": [
+        "Controlled tool TMO before dispatch has no reservation/model call; provider timeout after dispatch remains uncertain and cannot be treated as artificial TMO."
+      ]
+    }
+  },
+  "workflow_hooks": {
+    "after_capture_before_render": {
+      "owner": "A exposes / B implements delivery handler",
+      "location": "Within existing Workflow.run_step, after declared tool capture/parent selection and before render or dispatch.",
+      "input": "ctx, captured snapshots, selected parent refs; no private fields enter business bundle",
+      "output": "actual captured snapshots plus public carriers, or timeout terminal request",
+      "invariants": [
+        "On timeout close this attempt with failed StepResult payload=null/effects=[]/model_calls=[]; no render or dispatch.",
+        "Capture provenance remains true; STL update event is explicit and current source version is not forged."
+      ]
+    },
+    "after_schema_before_publish": {
+      "owner": "A exposes / B implements delivery handler",
+      "location": "After model output structural validation, before append_result/publication.",
+      "input": "ctx, validated candidate, actual call refs",
+      "output": "candidate unchanged or single ERR field replacement plus audit binding",
+      "invariants": [
+        "Invalid original schema -> no ERR injection.",
+        "Store model ledger delivered_output must match the published injected candidate, while raw response/private original is preserved separately.",
+        "No second Workflow or schema-guard bypass."
+      ]
+    },
+    "after_publish_before_adopt": {
+      "owner": "A exposes / B implements VERIFY_STOP handler",
+      "location": "After a successful query/Plan is persisted and before any downstream step adopts it.",
+      "input": "published result_ref, public request, legal current source reader",
+      "output": "accept for adoption or reject with verifier audit and terminal runner status",
+      "invariants": [
+        "BASE no-op; VERIFY_STOP records every actual check.",
+        "Rejection does not mutate model result or become a fake model error.",
+        "No verifier on failed TMO or unstarted step."
+      ]
+    }
+  },
+  "cross_module_dependency_order": [
+    "C publishes immutable task/trial manifests and early checker fixture.",
+    "A/B/C agree on render fixtures and TMO zero-output handoff.",
+    "A exposes narrow hooks/lifecycle/budget primitives; B implements injector/verifier/runner; C implements independent initial checker and evidence labels.",
+    "B may develop against a fake Gateway and fixed lifecycle receipts; A uses passthrough delivery; C uses static traces.",
+    "P1 implementation is a later separately authorized step; P0 files are fixtures/specifications only."
+  ],
+  "ownership": {
+    "A": [
+      "existing Workflow hook exposure",
+      "render_p1 and message/call binding",
+      "partial-prefix lifecycle primitives",
+      "single campaign ledger and transport"
+    ],
+    "B": [
+      "private FaultSpec binding and delivery",
+      "runtime verifier",
+      "five-step runner and fixed slot order",
+      "full-restart orchestration using A primitives"
+    ],
+    "C": [
+      "public tasks and immutable slots",
+      "independent truth/checker",
+      "early restart eligibility",
+      "summaries and reports"
+    ]
+  },
+  "global_invariants": [
+    "Legacy 1.1 TaskSpec/StepResult/object snapshot fields remain exact; no silent schema expansion.",
+    "Unknown or active scenes never restart.",
+    "Never return a correct-answer payload through initial_checker.",
+    "Fault identity distinguishes failed attempt/failed result record from a successful faulty_result_id.",
+    "One run may have no successful results/effects; no fake successful FaultNotice for TMO.",
+    "Static samples and synthetic token/time values are not model results or measured performance."
+  ]
+}

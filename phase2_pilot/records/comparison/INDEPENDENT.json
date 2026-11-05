@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "actual_recovery_measurement": true,
+  "calls": 24,
+  "revision": "l-compare-entry-check-v1",
+  "old_first_reopened": false,
+  "real_mode": true,
+  "history_calls": 364
+}

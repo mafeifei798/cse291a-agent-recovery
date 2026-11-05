@@ -1,0 +1,1 @@
+{"columns":["age","job","education","housing","loan","contact","month","day_of_week","pdays","previous","poutcome"],"excluded":["duration","campaign"],"label":"y","prediction_time":"pre_call","row_count":41188}

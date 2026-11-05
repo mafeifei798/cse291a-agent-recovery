@@ -1,0 +1,141 @@
+[
+  {
+    "admission_numeric_record_rel": "jobs/check-0001.record.json",
+    "artifact_hashes_checked": true,
+    "contract": {
+      "code_sha256": "2724919ec09ee5f0bb6f225025550807506f4152f5b89c49f988d2df5c82d2ed",
+      "data_binding": {
+        "file_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
+        "train_rows_sha256": "abdb3f7154016309791cf67e47b4e976308f315db7210517595de73de5ab07ac",
+        "validation_rows_sha256": "be1d2418cb4ea3e120210a6ad7b7442b310040e95cedc70d4c53cfbeb8f3a07c"
+      },
+      "dataset_id": "bank",
+      "feature_columns": [
+        "age",
+        "job",
+        "education",
+        "housing",
+        "loan",
+        "contact",
+        "month",
+        "day_of_week",
+        "pdays",
+        "previous",
+        "poutcome"
+      ],
+      "label_column": "y",
+      "output_schema": "binary-probability-v1",
+      "preprocessing": {
+        "categorical": "onehot_ignore_unknown",
+        "numeric": "median_standardize"
+      },
+      "recipe": {
+        "model_family": "random_forest",
+        "parameters": {
+          "max_depth": 8,
+          "n_estimators": 40,
+          "n_jobs": 1
+        }
+      },
+      "seed": 17
+    },
+    "fits": 0,
+    "kind": "screen",
+    "producer_campaign_root": "/home/hoding/cse291a-l-feedback-20261031-r3/real/campaign",
+    "producer_id": "fit-0004",
+    "producer_record_sha256": "b8a9d66ac6b57f68a3660e1de763f206f5f5101bfe66dd6ad1bc2051af97cc71",
+    "record_rel": "jobs/fit-0004.record.json"
+  },
+  {
+    "admission_numeric_record_rel": "jobs/check-0002.record.json",
+    "artifact_hashes_checked": true,
+    "contract": {
+      "code_sha256": "2724919ec09ee5f0bb6f225025550807506f4152f5b89c49f988d2df5c82d2ed",
+      "data_binding": {
+        "file_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
+        "train_rows_sha256": "abdb3f7154016309791cf67e47b4e976308f315db7210517595de73de5ab07ac",
+        "validation_rows_sha256": "be1d2418cb4ea3e120210a6ad7b7442b310040e95cedc70d4c53cfbeb8f3a07c"
+      },
+      "dataset_id": "bank",
+      "feature_columns": [
+        "age",
+        "job",
+        "education",
+        "housing",
+        "loan",
+        "contact",
+        "month",
+        "day_of_week",
+        "pdays",
+        "previous",
+        "poutcome"
+      ],
+      "label_column": "y",
+      "output_schema": "binary-probability-v1",
+      "preprocessing": {
+        "categorical": "onehot_ignore_unknown",
+        "numeric": "median_standardize"
+      },
+      "recipe": {
+        "model_family": "logistic_regression",
+        "parameters": {
+          "C": 1.0,
+          "max_iter": 200
+        }
+      },
+      "seed": 17
+    },
+    "fits": 0,
+    "kind": "screen",
+    "producer_campaign_root": "/home/hoding/cse291a-l-feedback-20261031-r3/real/campaign",
+    "producer_id": "fit-0005",
+    "producer_record_sha256": "6a8c397fb95bef66decfaea836e7c351645c71804436e4e52109da9f94bb77fa",
+    "record_rel": "jobs/fit-0005.record.json"
+  },
+  {
+    "admission_numeric_record_rel": "jobs/check-0003.record.json",
+    "artifact_hashes_checked": true,
+    "contract": {
+      "code_sha256": "2724919ec09ee5f0bb6f225025550807506f4152f5b89c49f988d2df5c82d2ed",
+      "data_binding": {
+        "file_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
+        "train_rows_sha256": "f7567c772f91221f38e789ec203cbea80e41fb68d16be5b9fa6ae88f9c78c6eb",
+        "validation_rows_sha256": "75d829c0b00daeb9c8b4479b077a3a65a733b86fc7bec4ce3eae5a332930a187"
+      },
+      "dataset_id": "bank",
+      "feature_columns": [
+        "age",
+        "job",
+        "education",
+        "housing",
+        "loan",
+        "contact",
+        "month",
+        "day_of_week",
+        "pdays",
+        "previous",
+        "poutcome"
+      ],
+      "label_column": "y",
+      "output_schema": "binary-probability-v1",
+      "preprocessing": {
+        "categorical": "onehot_ignore_unknown",
+        "numeric": "median_standardize"
+      },
+      "recipe": {
+        "model_family": "logistic_regression",
+        "parameters": {
+          "C": 1.0,
+          "max_iter": 200
+        }
+      },
+      "seed": 17
+    },
+    "fits": 0,
+    "kind": "final",
+    "producer_campaign_root": "/home/hoding/cse291a-l-feedback-20261031-r3/real/campaign",
+    "producer_id": "fit-0006",
+    "producer_record_sha256": "578e7588577789aa3bbc25b36d3d14e71a3a78223a17ac475abfad0c175a4f7d",
+    "record_rel": "jobs/fit-0006.record.json"
+  }
+]

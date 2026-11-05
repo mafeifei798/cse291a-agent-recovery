@@ -1,0 +1,150 @@
+{
+  "p1_schema_version": "p1.0",
+  "protocol_version": "p0-v1",
+  "freeze_id": "p0-v1-5aa953e9e83924eb",
+  "status": "frozen_static_contracts_only",
+  "created_at": "2026-10-19T22:46:35.507540+00:00",
+  "content_digest": "5aa953e9e83924eb6f2266f478eec833a843e13d40b548df9b540ea0ad6f19c2",
+  "digest_algorithm": "sha256",
+  "content_digest_rule": "SHA256 canonical JSON of exactly {files,external_pins}; file sha256 hashes exact bytes.",
+  "self_digest_rule": "seal_digest hashes this full object without the seal_digest key.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 11323,
+      "sha256": "b49edde5c0d9224dc9feb7b6b7cd51ebd0da44f9ac539493c9ddf97002d74f90"
+    },
+    {
+      "path": "contracts/README.md",
+      "bytes": 10782,
+      "sha256": "4b141342a4cae7539389e13ff613e6f8e59f9c94cc664f8896755aa515d4f6f8"
+    },
+    {
+      "path": "contracts/interfaces.json",
+      "bytes": 21983,
+      "sha256": "180d81636a5e632b4197b6b15e3f22442ad8a277fff8e7fe107e7949c990c444"
+    },
+    {
+      "path": "contracts/prompt_spec.json",
+      "bytes": 9835,
+      "sha256": "0c8f095a1ab68fbd5ccaa6fecf0976d3b60254e148747e024ef6d3187ac3001f"
+    },
+    {
+      "path": "contracts/records.schema.json",
+      "bytes": 28898,
+      "sha256": "3701783e620e46e1a38e4a7c9523c02cab5fc9f3d0f02a1cb1e2c3b4a3d08d43"
+    },
+    {
+      "path": "manifests/faults.private.json",
+      "bytes": 67479,
+      "sha256": "ccdc3f069b7bade34428190b34255f9e9dc31f340650158295390f74a74d878f"
+    },
+    {
+      "path": "manifests/model_binding.json",
+      "bytes": 2349,
+      "sha256": "5f36853cba27fb23d980776c1a170cab1df881dc69bd7f8e2ddc3be57253106a"
+    },
+    {
+      "path": "manifests/private_truth.json",
+      "bytes": 33416,
+      "sha256": "53755691c6d611c5835f49868a99253b265f7a7cedd59d70340885c71eb3053c"
+    },
+    {
+      "path": "manifests/protocol.json",
+      "bytes": 6840,
+      "sha256": "19ce97b6ffcf5c9aa3c616ed241d19394ed677483fd71670a92a85c449dc366f"
+    },
+    {
+      "path": "manifests/tasks.json",
+      "bytes": 20201,
+      "sha256": "a5c16aa95dfb0234522b0afd882780f0d8dc5a3397ad9d2686284d9290cb18cc"
+    },
+    {
+      "path": "manifests/trials.jsonl",
+      "bytes": 225876,
+      "sha256": "132b4fc0818f88f66d3725b4252c3b51747f661111b53f9dc3edca9e3996853c"
+    },
+    {
+      "path": "samples/adv_followed.json",
+      "bytes": 111214,
+      "sha256": "cda668997befc7d6ae2bbd5c529f11ecfd9cfacb1698d78a773905096fa75497"
+    },
+    {
+      "path": "samples/adv_ignored.json",
+      "bytes": 111096,
+      "sha256": "b734a8fbb988b99e5fd7ec35572c2f2d3d2bc1b078b875a90bdd655e278e6452"
+    },
+    {
+      "path": "samples/err_delivered_output.json",
+      "bytes": 48832,
+      "sha256": "9ba977ca98a6e4ecefdcbfeadd1c8da381b67d99a148e9bda31a4bb5a78dec29"
+    },
+    {
+      "path": "samples/normal_five_steps.json",
+      "bytes": 48182,
+      "sha256": "38c197bbadf3ad0bf1932e422408ee8d274e143225895133b346114d3765ded6"
+    },
+    {
+      "path": "samples/prompt_rendering.json",
+      "bytes": 26184,
+      "sha256": "4711e4ecea37ace3f22d7402ee50f0ede909f7bb19407bcff0f2a26baace045f"
+    },
+    {
+      "path": "samples/stale_v1_to_v2.json",
+      "bytes": 101830,
+      "sha256": "9773701273fc4d1a2587632936b60feb29921f84dfea4588a9aee6ce7328608a"
+    },
+    {
+      "path": "samples/tmo_zero_output.json",
+      "bytes": 65282,
+      "sha256": "7bd6dae16f53dc3b60b5495d259761a11bd4b61a34e1fffb8086a1a631563a5e"
+    }
+  ],
+  "external_pins": [
+    {
+      "path": "outputs/phase1_execution_plan.md",
+      "sha256": "d0dec0d2224dd0b1e7d67d7be2c71837ecc156f4980aa6c84b95e69d72bb847b"
+    },
+    {
+      "path": "scripts/validate_phase1_p0.py",
+      "sha256": "1d8e2d714b3036853fffd482ba383af169e3855796eb8092c16401068b8caa56"
+    },
+    {
+      "path": "work/s6_transfer/0b5efd1d2f45750b/release_manifest.json",
+      "sha256": "9bbb5cf362ffd94736c13583c3e076a4086431f63d7c9f11d522f9737335fb3c"
+    },
+    {
+      "path": "outputs/s6_offline_server_handoff.json",
+      "sha256": "c851fcbf94b4ffa833181d3da2539b2cf9347ebf28e9c2b0042ec286563d97aa"
+    }
+  ],
+  "counts": {
+    "tasks": 12,
+    "core_tasks": 4,
+    "extension_tasks_enabled": 0,
+    "formal_slots": 168,
+    "base_slots": 60,
+    "verify_stop_slots": 60,
+    "full_restart_slots": 48,
+    "private_fault_specs": 48,
+    "private_truth_rows": 24,
+    "static_sample_files": 7,
+    "complete_audit_summary_examples": 8
+  },
+  "authorization": {
+    "p0_static_freeze": "authorized_by_current_user_request",
+    "p1_started": false,
+    "real_model_requests_authorized": false,
+    "model_binding": "unresolved"
+  },
+  "runtime_results_in_this_pack": false,
+  "verification_report_ref": "../../outputs/phase1_p0_validation_report.json",
+  "baseline": {
+    "s6_release_id": "0b5efd1d2f45750bb6fbb1f901b04628ba00be5436a5166876ebbbc039eaf6eb",
+    "expected_unchanged_files": 50,
+    "historical_tests_passed": 267,
+    "tests_rerun_by_p0": false
+  },
+  "change_policy": "Do not overwrite frozen definitions. New protocol/runtime binding must cite this freeze and receive its own digest. Runtime evidence belongs outside this pack.",
+  "seal_digest": "47d2f1cb983a565d3de55255ae817559b70de41b6f38de8e8447695bbd54c968"
+}

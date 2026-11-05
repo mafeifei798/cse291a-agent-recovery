@@ -1,0 +1,8 @@
+{
+  "archive": "cse291a_phase1_safety_supplement_20261102_r15.zip",
+  "archive_sha256": "e522d72b99035d699a3c6f6335f9cd57b61f92f580dbf2d881063dd81aaaa3c6",
+  "manifest_sha256": "8066b2cacf7b7622e8a551480059613e46f6bcb3fd92bb0c78f5ae1723d582bc",
+  "checker_sha256": "05ed6efae9e057f464ae90a45cef5c01917b319351c6963aa7e0742d06d6b369",
+  "raw_files": 2582,
+  "default_directory": "supplements/phase1_safety_supplement"
+}
